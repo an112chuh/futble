@@ -1,0 +1,81 @@
+ERROR 2022/06/08 02:43:15 report.go:54: 08.06.2022 02:43:15
+D:/futble/game/auth.go:167
+pq: столбец "is_active" не существует
+
+POST /api/login HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 53
+Content-Type: text/plain
+Cookie: cookie-name=MTY1NDY0NDkyN3xwLUZRMVhVeV9mUzBIaERtR19HMmF5TjQ0bUZQLUcxTlZDQUZMQ21uNHlWd0s2MHdWcDdXQ0l2eG1vQU1BTmZjaGQ0ZGhLLXMxekFONUFWTnR6ejJNbVhmNXV5a0VqbzhzcHFjY1JIY3BoSVo2NFJRS1JZWnRUYThVV2pIUzB0S250S3haNjFVWHA4S3QyZ1JnM0l3b0FLcFRWT3BuRUtIZmUxN2VEOE1JU2NhQ0FxT21YSnFsRGNsQ1ZRejVXZFNKRzZJOFZ1UDlZVGdwZz09fJT-yepWlEzT1ChQZsh2aMONE3cySWcTqvXppbUFUU-a
+Postman-Token: f66f8586-a4d6-4cbb-9083-f18fbdb9ece2
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/06/08 02:43:15 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/08 02:43:15 report.go:56: 
+ERROR 2022/06/12 04:20:09 report.go:54: 12.06.2022 04:20:09
+D:/futble/game/unlimited.go:97
+pq: столбец "id_game" не существует
+
+ERROR 2022/06/12 04:20:09 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/12 04:20:09 report.go:56: 
+ERROR 2022/06/12 04:21:12 report.go:54: 12.06.2022 04:21:12
+D:/futble/game/unlimited.go:97
+sql: no rows in result set
+
+ERROR 2022/06/12 04:21:12 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/12 04:21:12 report.go:56: 
+ERROR 2022/06/12 04:22:23 report.go:54: 12.06.2022 04:22:23
+D:/futble/game/game.go:59
+pq: got 1 parameters but the statement requires 0
+
+ERROR 2022/06/12 04:22:23 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/12 04:22:23 report.go:56: 
+ERROR 2022/06/12 04:38:19 report.go:54: 12.06.2022 04:38:19
+D:/futble/game/game.go:338
+sql: Scan error on column index 0, name "surname": destination not a pointer
+
+POST /api/find?name=A HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 52
+Content-Type: text/plain
+Cookie: cookie-name=MTY1NDY0NTQzNXxySDR5aWlEb2c5cVZSa0ZLa0lxNHB4LXhyTFhCV3RYejd1LWpPb281VzYwY2pCNWh6VEpaR1N3M1NJOHJKOHBWaHMwaG1FNjlXdUJpSktiajNxVm9uLVpRZnpVOTQtMGVJN1A3SWFLbkRBYmhUai1MaW41Zkpyemg5WXlDV1hWRHVKOHpFaFVlVnMwMkZvbXJqSUN0Ung2NXEwU0JDajRueUU3SUFtNndnWkxJQ2JhR3BEUTdmSHVNM3M4OHE0SDFfQ0VSSjNiVVliTTdzUT09fHvxU398HC2wVir5Pt4QWYn0gZ5_jm6544UjFywJmODU
+Postman-Token: 945813a2-f30d-4853-aab8-a31df05c7cfe
+User-Agent: PostmanRuntime/7.29.0
+
+========== POST DATA ========
+"name=A"
+
+POST[name]=A
+
+
+
+ERROR 2022/06/12 04:38:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/12 04:38:19 report.go:56: 
+ERROR 2022/06/12 18:49:46 report.go:54: 12.06.2022 18:49:46
+D:/futble/game/daily.go:191
+pq: деление на ноль
+
+UPDATE users.daily SET total = total + 1, success = success + 1, percent = total / success, res4 = res4 + 1 WHERE id_user = 1
+
+&pq.Error{Severity:"ОШИБКА", Code:"22012", Message:"деление на ноль", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"int.c", Line:"822", Routine:"int4div"}
+
+ERROR 2022/06/12 18:49:46 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/12 18:49:46 report.go:56: 
+ERROR 2022/06/12 18:56:58 report.go:54: 12.06.2022 18:56:58
+D:/futble/game/rating.go:126
+pq: ошибка синтаксиса (примерное положение: "<")
+
+SELECT id FROM dates.week start_time < '2022-06-12 18:56:58.238' AND end_time > '2022-06-12 18:56:58.238'
+
+&pq.Error{Severity:"ОШИБКА", Code:"42601", Message:"ошибка синтаксиса (примерное положение: \"<\")", Detail:"", Hint:"", Position:"38", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"scan.l", Line:"1180", Routine:"scanner_yyerror"}
+
+ERROR 2022/06/12 18:56:58 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/12 18:56:58 report.go:56: 
