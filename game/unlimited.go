@@ -72,17 +72,34 @@ func UnlimitedAnswerHandler(w http.ResponseWriter, r *http.Request) {
 	if GameResult == LOSE {
 		res.Done = true
 		res.Items = `Game lost`
-		ChangeUnlimitedStatusGame(IDGame)
 	}
 	if GameResult == WIN {
 		res.Done = true
 		res.Items = `Game won`
-		ChangeUnlimitedStatusGame(IDGame)
 	}
 	if GameResult == NOTHING {
 		res.Done = true
 		res.Items = `Game continue`
 	}
+	result.ReturnJSON(w, &res)
+}
+
+func UnlimitedNewHandler(w http.ResponseWriter, r *http.Request) {
+	var res result.ResultInfo
+	user := IsLogin(w, r)
+	IDGame := CheckUnlimitedGameExist(user)
+	if IDGame == -1 {
+		res = result.SetErrorResult(`Ошибка при поиске текущей игры`)
+		result.ReturnJSON(w, &res)
+		return
+	}
+	if IDGame == 0 {
+		res = result.SetErrorResult(`Данной игры не существует`)
+		result.ReturnJSON(w, &res)
+		return
+	}
+	ChangeUnlimitedStatusGame(IDGame)
+	res.Done = true
 	result.ReturnJSON(w, &res)
 }
 

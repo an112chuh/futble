@@ -165,6 +165,7 @@ func GameInfoCollect(ID int) (Game, error) {
 		}
 		res.Answers = append(res.Answers, Answer)
 	}
+	res.ID = ID
 	return res, nil
 }
 
@@ -187,6 +188,7 @@ func CheckRecord(IDPlayer int, IDAnswer int) (AnswerType, error) {
 		report.ErrorSQLServer(nil, err, query, params...)
 		return a, err
 	}
+	a.ID = IDPlayer
 	a.Name = Guess.Name
 	a.Surname = Guess.Surname
 	a.Age = FuncAge(Guess.Birth, time.Now())
@@ -339,12 +341,25 @@ func PutGuess(Guess int, IDGame int) (res result.ResultInfo, GameResult int, err
 		res = result.SetErrorResult(`Достигнуто максимальное число попыток(8)`)
 		return
 	}
+	var LastGuess int
+	query = `SELECT id_guess FROM games.guess WHERE id_game = $1 ORDER BY id DESC LIMIT 1`
+	err = db.QueryRow(query, params...).Scan(&LastGuess)
+	if err != nil {
+		res = result.SetErrorResult(`Ошибка при запросе к БД`)
+		report.ErrorSQLServer(nil, err, query, params...)
+		return
+	}
 	var Answer int
 	query = `SELECT id_answer FROM games.list WHERE id = $1`
 	err = db.QueryRow(query, params...).Scan(&Answer)
 	if err != nil {
 		res = result.SetErrorResult(`Ошибка при запросе к БД`)
 		report.ErrorSQLServer(nil, err, query, params...)
+		return
+	}
+	if LastGuess == Answer {
+		res = result.SetErrorResult(`Игрок уже угадан`)
+		GameResult = -10
 		return
 	}
 	if Guess == Answer {
