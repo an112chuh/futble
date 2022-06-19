@@ -9,40 +9,6 @@ import (
 	"time"
 )
 
-func RatingHandler(w http.ResponseWriter, r *http.Request) {
-	var res result.ResultInfo
-	user := IsLogin(w, r)
-	IDGame := CheckRatingGameExist(user)
-	if IDGame == -1 {
-		res = result.SetErrorResult(`Ошибка при поиске текущей игры`)
-		result.ReturnJSON(w, &res)
-		return
-	}
-	if IDGame == 0 {
-		var err error
-		IDGame, err = CreateGame(RATING, user)
-		if err != nil {
-			res = result.SetErrorResult(`Ошибка при создании новой игры`)
-			result.ReturnJSON(w, &res)
-			return
-		}
-		if IDGame == -2 {
-			res = result.SetErrorResult(`Необходимо зарегистрироваться для создания новой игры`)
-			result.ReturnJSON(w, &res)
-			return
-		}
-	}
-	GameInfo, err := GameInfoCollect(IDGame)
-	if err != nil {
-		res = result.SetErrorResult(`Ошибка при получении данных об игре`)
-		result.ReturnJSON(w, &res)
-		return
-	}
-	res.Done = true
-	res.Items = GameInfo
-	result.ReturnJSON(w, &res)
-}
-
 func RatingAnswerHandler(w http.ResponseWriter, r *http.Request) {
 	var res result.ResultInfo
 	user := IsLogin(w, r)

@@ -79,3 +79,235 @@ SELECT id FROM dates.week start_time < '2022-06-12 18:56:58.238' AND end_time > 
 
 ERROR 2022/06/12 18:56:58 report.go:55: ——————————————————————————————————————————————————————————————————————
 ERROR 2022/06/12 18:56:58 report.go:56: 
+ERROR 2022/06/18 22:12:31 report.go:54: 18.06.2022 22:12:31
+D:/futble/game/game.go:387
+pq: got 2 parameters but the statement requires 1
+
+SELECT id_guess FROM games.guess WHERE id_game = '2022-06-18 22:12:31.147' ORDER BY id DESC LIMIT 1
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:12:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:12:31 report.go:56: 
+ERROR 2022/06/18 22:13:19 report.go:54: 18.06.2022 22:13:19
+D:/futble/game/game.go:388
+sql: no rows in result set
+
+SELECT id_guess FROM games.guess WHERE id_game = 8 ORDER BY id DESC LIMIT 1
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:13:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:13:19 report.go:56: 
+ERROR 2022/06/18 22:16:18 report.go:54: 18.06.2022 22:16:18
+D:/futble/game/game.go:283
+sql: no rows in result set
+
+SELECT place FROM players.league WHERE league = 'DEU'
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:16:18 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:18 report.go:56: 
+ERROR 2022/06/18 22:16:18 report.go:54: 18.06.2022 22:16:18
+D:/futble/game/game.go:164
+sql: no rows in result set
+
+ERROR 2022/06/18 22:16:18 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:18 report.go:56: 
+ERROR 2022/06/18 22:16:31 report.go:54: 18.06.2022 22:16:31
+D:/futble/game/game.go:283
+sql: no rows in result set
+
+SELECT place FROM players.league WHERE league = 'DEU'
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:16:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:31 report.go:56: 
+ERROR 2022/06/18 22:16:31 report.go:54: 18.06.2022 22:16:31
+D:/futble/game/game.go:164
+sql: no rows in result set
+
+ERROR 2022/06/18 22:16:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:31 report.go:56: 
+ERROR 2022/06/18 22:16:33 report.go:54: 18.06.2022 22:16:33
+D:/futble/game/game.go:283
+sql: no rows in result set
+
+SELECT place FROM players.league WHERE league = 'DEU'
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:16:33 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:33 report.go:56: 
+ERROR 2022/06/18 22:16:33 report.go:54: 18.06.2022 22:16:33
+D:/futble/game/game.go:164
+sql: no rows in result set
+
+ERROR 2022/06/18 22:16:33 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:33 report.go:56: 
+ERROR 2022/06/18 22:16:34 report.go:54: 18.06.2022 22:16:34
+D:/futble/game/game.go:283
+sql: no rows in result set
+
+SELECT place FROM players.league WHERE league = 'DEU'
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:16:34 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:34 report.go:56: 
+ERROR 2022/06/18 22:16:34 report.go:54: 18.06.2022 22:16:34
+D:/futble/game/game.go:164
+sql: no rows in result set
+
+ERROR 2022/06/18 22:16:34 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:16:34 report.go:56: 
+ERROR 2022/06/18 22:17:56 report.go:54: 18.06.2022 22:17:56
+D:/futble/game/daily.go:158
+sql: Scan error on column index 0, name "?column?": unsupported Scan, storing driver.Value type []uint8 into type *time.Time
+
+select start_time - finish_time from games.list where id = 8
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:17:56 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:17:56 report.go:56: 
+ERROR 2022/06/18 22:25:44 report.go:54: 18.06.2022 22:25:44
+D:/futble/game/daily.go:140
+pq: got 1 parameters but the statement requires 2
+
+INSERT INTO users.daily (id_user, total, success, percent, res1, res2, res3, res4, res5, res6, res7, res8, cur_streak, max_streak, best_time) 
+			VALUES (2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, $2$)
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/18 22:25:44 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:25:44 report.go:56: 
+ERROR 2022/06/18 22:33:12 report.go:54: 18.06.2022 22:33:12
+D:/futble/game/action.go:46
+sql: no rows in result set
+
+POST /api/game HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 52
+Content-Type: text/plain
+Postman-Token: 728da0f5-d0ad-4fff-9a42-e4ffc29ecd0b
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/06/18 22:33:12 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/18 22:33:12 report.go:56: 
+ERROR 2022/06/19 08:04:32 report.go:54: 19.06.2022 08:04:32
+D:/futble/game/daily.go:286
+pq: столбец "win" не существует
+
+SELECT name, surname, start_time, finish_time, win FROM players.data 
+			INNER JOIN games.list on games.list.id_answer = players.data.id
+			WHERE id_user = 6 AND game_type = 1 ORDER BY games.list.id DESC LIMIT 1
+
+&pq.Error{Severity:"ОШИБКА", Code:"42703", Message:"столбец \"win\" не существует", Detail:"", Hint:"", Position:"48", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"3599", Routine:"errorMissingColumn"}
+
+ERROR 2022/06/19 08:04:32 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/19 08:04:32 report.go:56: 
+ERROR 2022/06/19 08:06:25 report.go:54: 19.06.2022 08:06:25
+D:/futble/game/daily.go:287
+pq: неоднозначная ссылка на столбец "id_user"
+
+SELECT name, surname, start_time, finish_time, win FROM players.data 
+			INNER JOIN games.list on games.list.id_answer = players.data.id
+			INNER JOIN games.daily on games.daily.id_game = games.list.id
+			WHERE id_user = 6 AND game_type = 1 ORDER BY games.list.id DESC LIMIT 1
+
+&pq.Error{Severity:"ОШИБКА", Code:"42702", Message:"неоднозначная ссылка на столбец \"id_user\"", Detail:"", Hint:"", Position:"212", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"809", Routine:"scanRTEForColumn"}
+
+ERROR 2022/06/19 08:06:25 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/19 08:06:25 report.go:56: 
+ERROR 2022/06/19 08:06:44 report.go:54: 19.06.2022 08:06:44
+D:/futble/game/daily.go:287
+sql: Scan error on column index 4, name "win": sql/driver: couldn't convert <nil> (<nil>) into type bool
+
+SELECT name, surname, start_time, finish_time, win FROM players.data 
+			INNER JOIN games.list on games.list.id_answer = players.data.id
+			INNER JOIN games.daily on games.daily.id_game = games.list.id
+			WHERE games.list.id_user = 6 AND game_type = 1 ORDER BY games.list.id DESC LIMIT 1
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/19 08:06:44 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/19 08:06:44 report.go:56: 
+ERROR 2022/06/19 08:42:39 report.go:54: 19.06.2022 08:42:39
+D:/futble/game/unlimited.go:162
+sql: Scan error on column index 0, name "total_time": converting driver.Value type time.Time ("0000-01-01 00:00:05 +0000 UTC") to a int64: invalid syntax
+
+SELECT total_time, tries FROM users.unlimited WHERE id_user = 6
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+POST /api/unlimited/avg_time HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 52
+Content-Type: text/plain
+Cookie: cookie-name=MTY1NTU4MTQyNHxodjJEUE9FUWFyeUZ0Y2hzMkJMYVlnNzNFdlRQN21YTHU1Tzk1aVBaMk1DZmlDUGw3UXdHbzVSX0wzTkdicVRkVzhOb01fUk1MRlM3d0ZDN0xDaWFLM3dFVWJieDRFODU5UVhTMEtnZEtSMlhoZ2lIY1Z2TlVOR3B1VU1BbnVlbDB3OWZGS3pFYUxUX0JJc0FrNnhDdmlVem9Vam9ZYlpkUU1OYzl6X2hNbHJKaWF0SUxQYXhTUU5tZTg2cjRYS3FaNXRqX0JOX0dRRjk4ZWtmQ1E9PXyOyOBE7HjWpnDIGnWclOD-rkH9lMBtpPpRF0FYCWT5ZA==
+Postman-Token: 65135109-ecd5-4dad-bd46-c935844e19c4
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/06/19 08:42:39 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/19 08:42:39 report.go:56: 
+ERROR 2022/06/19 08:50:13 report.go:54: 19.06.2022 08:50:13
+D:/futble/game/unlimited.go:182
+pq: столбец "end_time" не существует
+
+SELECT name, surname FROM players.data 
+		INNER JOIN games.list ON games.list.id_answer = players.data.id
+		WHERE id_user = 6 AND game_type = 3 AND start_time < '2022-06-19 08:50:13.375' AND end_time > '2022-06-19 08:50:13.375' 
+		ORDER BY games.list.id DESC LIMIT 1
+
+&pq.Error{Severity:"ОШИБКА", Code:"42703", Message:"столбец \"end_time\" не существует", Detail:"", Hint:"", Position:"170", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"3599", Routine:"errorMissingColumn"}
+
+POST /api/unlimited/avg_time HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 52
+Content-Type: text/plain
+Cookie: cookie-name=MTY1NTU4MTQyNHxodjJEUE9FUWFyeUZ0Y2hzMkJMYVlnNzNFdlRQN21YTHU1Tzk1aVBaMk1DZmlDUGw3UXdHbzVSX0wzTkdicVRkVzhOb01fUk1MRlM3d0ZDN0xDaWFLM3dFVWJieDRFODU5UVhTMEtnZEtSMlhoZ2lIY1Z2TlVOR3B1VU1BbnVlbDB3OWZGS3pFYUxUX0JJc0FrNnhDdmlVem9Vam9ZYlpkUU1OYzl6X2hNbHJKaWF0SUxQYXhTUU5tZTg2cjRYS3FaNXRqX0JOX0dRRjk4ZWtmQ1E9PXyOyOBE7HjWpnDIGnWclOD-rkH9lMBtpPpRF0FYCWT5ZA==
+Postman-Token: 02f38965-817e-4bc5-b7ae-dccfa50ae925
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/06/19 08:50:13 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/19 08:50:13 report.go:56: 
+ERROR 2022/06/19 08:50:40 report.go:54: 19.06.2022 08:50:40
+D:/futble/game/unlimited.go:182
+sql: no rows in result set
+
+SELECT name, surname FROM players.data 
+		INNER JOIN games.list ON games.list.id_answer = players.data.id
+		WHERE id_user = 6 AND game_type = 3 AND start_time < '2022-06-19 08:50:40.498' AND finish_time > '2022-06-19 08:50:40.498' 
+		ORDER BY games.list.id DESC LIMIT 1
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+POST /api/unlimited/avg_time HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 52
+Content-Type: text/plain
+Cookie: cookie-name=MTY1NTU4MTQyNHxodjJEUE9FUWFyeUZ0Y2hzMkJMYVlnNzNFdlRQN21YTHU1Tzk1aVBaMk1DZmlDUGw3UXdHbzVSX0wzTkdicVRkVzhOb01fUk1MRlM3d0ZDN0xDaWFLM3dFVWJieDRFODU5UVhTMEtnZEtSMlhoZ2lIY1Z2TlVOR3B1VU1BbnVlbDB3OWZGS3pFYUxUX0JJc0FrNnhDdmlVem9Vam9ZYlpkUU1OYzl6X2hNbHJKaWF0SUxQYXhTUU5tZTg2cjRYS3FaNXRqX0JOX0dRRjk4ZWtmQ1E9PXyOyOBE7HjWpnDIGnWclOD-rkH9lMBtpPpRF0FYCWT5ZA==
+Postman-Token: 05161a4d-c352-458a-8d82-a53bcc79420c
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/06/19 08:50:40 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/19 08:50:40 report.go:56: 

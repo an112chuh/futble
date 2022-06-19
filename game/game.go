@@ -1,6 +1,7 @@
 package game
 
 import (
+	"database/sql"
 	"futble/config"
 	"futble/constants"
 	"futble/report"
@@ -166,6 +167,26 @@ func GameInfoCollect(ID int) (Game, error) {
 		res.Answers = append(res.Answers, Answer)
 	}
 	res.ID = ID
+	res.TimeStart = new(string)
+	Mode, err := GetGameTypeByID(ID)
+	if err != nil {
+		return res, err
+	}
+	if Mode == DAILY || Mode == UNLIMITED {
+		var TimeStart *time.Time
+		query = `SELECT start_time FROM games.list WHERE id = $1`
+		params = []any{ID}
+		err = db.QueryRow(query, params...).Scan(&TimeStart)
+		if err != nil {
+			return res, err
+		}
+		if TimeStart == nil {
+			*res.TimeStart = time.Now().Format("02-01-2006 15:04:05")
+		} else {
+			*res.TimeStart = TimeStart.Format("02-01-2006 15:04:05")
+		}
+	}
+	res.GameMode = Mode
 	return res, nil
 }
 
@@ -341,10 +362,30 @@ func PutGuess(Guess int, IDGame int) (res result.ResultInfo, GameResult int, err
 		res = result.SetErrorResult(`Достигнуто максимальное число попыток(8)`)
 		return
 	}
+	if NumOfGuesses == 0 {
+		var Mode int
+		Mode, err = GetGameTypeByID(IDGame)
+		if err != nil {
+			report.ErrorServer(nil, err)
+			res = result.SetErrorResult(`Error in scan game mode`)
+			return
+		}
+		if Mode == DAILY || Mode == UNLIMITED {
+			query = `UPDATE games.list SET start_time = $1 WHERE id = $2`
+			params = []any{time.Now(), IDGame}
+			_, err = db.Exec(query, params...)
+			if err != nil {
+				res = result.SetErrorResult(`Ошибка при запросе к БД`)
+				report.ErrorSQLServer(nil, err, query, params...)
+				return
+			}
+		}
+	}
 	var LastGuess int
 	query = `SELECT id_guess FROM games.guess WHERE id_game = $1 ORDER BY id DESC LIMIT 1`
+	params = []any{IDGame}
 	err = db.QueryRow(query, params...).Scan(&LastGuess)
-	if err != nil {
+	if err != nil && err != sql.ErrNoRows {
 		res = result.SetErrorResult(`Ошибка при запросе к БД`)
 		report.ErrorSQLServer(nil, err, query, params...)
 		return
@@ -369,6 +410,25 @@ func PutGuess(Guess int, IDGame int) (res result.ResultInfo, GameResult int, err
 	} else {
 		GameResult = NOTHING
 	}
+	if GameResult == WIN || GameResult == LOSE {
+		var Mode int
+		Mode, err = GetGameTypeByID(IDGame)
+		if err != nil {
+			report.ErrorServer(nil, err)
+			res = result.SetErrorResult(`Error in scan game mode`)
+			return
+		}
+		if Mode == DAILY || Mode == UNLIMITED {
+			query = `UPDATE games.list SET finish_time = $1 WHERE id = $2`
+			params = []any{time.Now(), IDGame}
+			_, err = db.Exec(query, params...)
+			if err != nil {
+				res = result.SetErrorResult(`Ошибка при запросе к БД`)
+				report.ErrorSQLServer(nil, err, query, params...)
+				return
+			}
+		}
+	}
 	query = `INSERT INTO games.guess (id_game, id_guess) VALUES ($1, $2)`
 	params = []any{IDGame, Guess}
 	_, err = db.Exec(query, params...)
@@ -378,6 +438,15 @@ func PutGuess(Guess int, IDGame int) (res result.ResultInfo, GameResult int, err
 		return
 	}
 	return
+}
+
+func GetGameTypeByID(GameID int) (int, error) {
+	db := config.ConnectDB()
+	var GameType int
+	query := `SELECT game_type FROM games.list WHERE id = $1`
+	params := []any{GameID}
+	err := db.QueryRow(query, params...).Scan(&GameType)
+	return GameType, err
 }
 
 func FindPlayerHandler(w http.ResponseWriter, r *http.Request) {

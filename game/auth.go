@@ -9,6 +9,8 @@ import (
 	"hash/fnv"
 	"io"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gorilla/sessions"
 )
@@ -21,7 +23,6 @@ type AccountData struct {
 
 func TestHandler(w http.ResponseWriter, r *http.Request) {
 	IsLogin(w, r)
-
 }
 
 func RegHandler(w http.ResponseWriter, r *http.Request) {
@@ -88,6 +89,17 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 
 func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.User) {
 	db := config.ConnectDB()
+	if data.Login == `newman` {
+		Count := 0
+		query := `SELECT COUNT(*) FROM users.accounts`
+		err := db.QueryRow(query).Scan(&Count)
+		if err != nil {
+			report.ErrorServer(r, err)
+			res = result.SetErrorResult(`Внутренняя ошибка`)
+			return
+		}
+		data.Login += strconv.Itoa(Count + 1)
+	}
 	var LoginExist bool
 	query := `SELECT EXISTS(SELECT 1 FROM users.accounts WHERE login = $1)`
 	err := db.QueryRow(query, data.Login).Scan(&LoginExist)
@@ -114,6 +126,7 @@ func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.
 	user.Rights = 1
 	user.Username = data.Login
 	res.Done = true
+	SetOnline(user)
 	return
 }
 
@@ -154,7 +167,20 @@ func IsLogin(w http.ResponseWriter, r *http.Request) (user config.User) {
 		}
 		result.ReturnJSON(w, &res)
 	}
+	SetOnline(user)
 	return user
+}
+
+func SetOnline(user config.User) {
+	db := config.ConnectDB()
+	t := time.Now()
+	query := `UPDATE users.accounts SET online = $1 WHERE id = $2`
+	params := []interface{}{t, user.ID}
+	_, err := db.Exec(query, params...)
+	if err != nil {
+		report.ErrorSQLServer(nil, err, query, params...)
+		return
+	}
 }
 
 func HashCreation(password string) uint32 {
