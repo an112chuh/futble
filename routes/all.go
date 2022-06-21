@@ -10,7 +10,7 @@ func GetAllHandlers(r *mux.Router) {
 	r.HandleFunc("/api/register", game.RegHandler)
 	r.HandleFunc("/api/login", game.LoginHandler)
 	r.HandleFunc("/api/test", game.TestHandler)
-	r.HandleFunc("/api/find", game.FindPlayerHandler)
+	r.HandleFunc("/api/all_names", game.PlayerListHandler)
 	GetDailyHandler(r)
 }
 

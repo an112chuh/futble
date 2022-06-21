@@ -31,8 +31,13 @@ type PlayerData struct {
 	Birth    time.Time
 }
 
+type Player struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
 type SearchPlayers struct {
-	Surname []string `json:"surname"`
+	Players []Player `json:"players"`
 }
 
 func CreateGame(Type int, user config.User) (int, error) {
@@ -449,15 +454,12 @@ func GetGameTypeByID(GameID int) (int, error) {
 	return GameType, err
 }
 
-func FindPlayerHandler(w http.ResponseWriter, r *http.Request) {
+func PlayerListHandler(w http.ResponseWriter, r *http.Request) {
 	var res result.ResultInfo
 	var s SearchPlayers
 	db := config.ConnectDB()
-	keys := r.URL.Query()
-	PlayerFind := keys[`name`][0]
-	query := `SELECT surname FROM players.data WHERE surname like $1`
-	params := []any{PlayerFind + "%"}
-	rows, err := db.Query(query, params...)
+	query := `SELECT id, name, surname FROM players.data ORDER BY id ASC`
+	rows, err := db.Query(query)
 	if err != nil {
 		res = result.SetErrorResult(`Ошибка при поиске игроков`)
 		report.ErrorServer(r, nil)
@@ -466,13 +468,19 @@ func FindPlayerHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	defer rows.Close()
 	for rows.Next() {
-		var surname string
-		err = rows.Scan(&surname)
+		var p Player
+		var name, surname string
+		err = rows.Scan(&p.ID, &name, &surname)
 		if err != nil {
 			report.ErrorServer(r, err)
 			return
 		}
-		s.Surname = append(s.Surname, surname)
+		if name == `` {
+			p.Name = surname
+		} else {
+			p.Name = name + ` ` + surname
+		}
+		s.Players = append(s.Players, p)
 	}
 	res.Done = true
 	res.Items = s
