@@ -11,6 +11,7 @@ import (
 type Game struct {
 	ID         int          `json:"id"`
 	GameMode   int          `json:"game_mode"`
+	Started    *bool        `json:"started,omitempty"`
 	TimeStart  *string      `json:"start_time,omitempty"`
 	GameResult *string      `json:"game_result,omitempty"`
 	Answers    []AnswerType `json:"answers"`
@@ -53,6 +54,9 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 		res = DailyGame(user)
 	case UNLIMITED:
 		res = UnlimitedGame(user)
+	case RATING:
+		res = RatingGame(user)
+
 	}
 	result.ReturnJSON(w, &res)
 }
@@ -131,4 +135,47 @@ func GetGameModeByID(user config.User) (int, error) {
 	params := []any{user.ID}
 	err := db.QueryRow(query, params...).Scan(&GameMode)
 	return GameMode, err
+}
+
+func CheckPlayerIDExist(ID int) (exists bool) {
+	db := config.ConnectDB()
+	query := `SELECT EXISTS(SELECT 1 FROM players.data WHERE id = $1)`
+	params := []any{ID}
+	err := db.QueryRow(query, params...).Scan(&exists)
+	if err != nil {
+		report.ErrorServer(nil, err)
+	}
+	return exists
+}
+
+func CheckCurrentGameFinished(IDGame int) (result int) {
+	db := config.ConnectDB()
+	var Finished bool
+	query := `SELECT EXISTS(SELECT 1 FROM games.list WHERE id = $1 AND finish_time IS NOT NULL)`
+	params := []any{IDGame}
+	err := db.QueryRow(query, params...).Scan(&Finished)
+	if err != nil {
+		report.ErrorServer(nil, err)
+		return -10
+	}
+	if !Finished {
+		return NOTHING
+	}
+	var AnswerID, LastGuessID int
+	query = `SELECT id_answer FROM games.list WHERE id = $1`
+	err = db.QueryRow(query, params...).Scan(&AnswerID)
+	if err != nil {
+		report.ErrorServer(nil, err)
+		return -10
+	}
+	query = `SELECT id_guess FROM games.guess WHERE id_game = $1 ORDER BY id DESC LIMIT 1`
+	err = db.QueryRow(query, params...).Scan(&LastGuessID)
+	if err != nil {
+		report.ErrorServer(nil, err)
+		return -10
+	}
+	if AnswerID == LastGuessID {
+		return WIN
+	}
+	return LOSE
 }

@@ -99,6 +99,9 @@ func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.
 			return
 		}
 		data.Login += strconv.Itoa(Count + 1)
+		user.Rights = 0
+	} else {
+		user.Rights = 1
 	}
 	var LoginExist bool
 	query := `SELECT EXISTS(SELECT 1 FROM users.accounts WHERE login = $1)`
@@ -114,8 +117,8 @@ func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.
 	}
 	Hash := HashCreation(data.Password)
 	var ID int
-	query = `INSERT INTO users.accounts (login, not_logged, password) VALUES ($1, $2, $3) RETURNING id`
-	params := []any{data.Login, data.IsLogged, Hash}
+	query = `INSERT INTO users.accounts (login, not_logged, password, rights) VALUES ($1, $2, $3, $4) RETURNING id`
+	params := []any{data.Login, data.IsLogged, Hash, user.Rights}
 	err = db.QueryRow(query, params...).Scan(&ID)
 	if err != nil {
 		report.ErrorServer(r, err)
@@ -123,7 +126,6 @@ func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.
 	}
 	user.ID = ID
 	user.Authenticated = true
-	user.Rights = 1
 	user.Username = data.Login
 	res.Done = true
 	SetOnline(user)

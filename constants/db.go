@@ -27,5 +27,5 @@ func SetConnectionConstantsLocal(AdminName string) {
 }
 
 func SetConnectionConstantsGlobal() {
-	//запулить сюда новые константы
+	ConnectionServer.DBType = "postgres"
 }

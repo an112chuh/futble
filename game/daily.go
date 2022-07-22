@@ -50,6 +50,17 @@ func DailyGame(user config.User) (res result.ResultInfo) {
 		res = result.SetErrorResult(`Ошибка при получении данных об игре`)
 		return
 	}
+	Finished := CheckCurrentGameFinished(IDGame)
+	GameInfo.GameResult = new(string)
+	if Finished == LOSE {
+		*GameInfo.GameResult = `GAME LOSE`
+	}
+	if Finished == WIN {
+		*GameInfo.GameResult = `GAME WIN`
+	}
+	if Finished == NOTHING {
+		*GameInfo.GameResult = `GAME CONTINUE`
+	}
 	GameInfo.GameMode = DAILY
 	res.Done = true
 	res.Items = GameInfo
@@ -64,6 +75,11 @@ func DailyGameAnswer(user config.User, IDGuess int) (res result.ResultInfo) {
 	}
 	if IDGame == 0 {
 		res = result.SetErrorResult(`Данной игры не существует`)
+		return
+	}
+	exists := CheckPlayerIDExist(IDGuess)
+	if !exists {
+		res = result.SetErrorResult(`This player doesn't exist`)
 		return
 	}
 	res, GameResult, err := PutGuess(IDGuess, IDGame)
@@ -300,8 +316,8 @@ func GetDailyStats(IDUser int) (res result.ResultInfo) {
 		}
 	}
 	var EndTime time.Time
-	query = `SELECT end_time FROM games.daily WHERE id_user=$1 AND success = TRUE AND end_time > $2`
-	params = []any{IDUser, t}
+	query = `SELECT day_finish FROM games.daily_answers WHERE day_start < $1 ORDER BY day_start DESC LIMIT 1`
+	params = []any{t}
 	err = db.QueryRow(query, params...).Scan(&EndTime)
 	if err != nil {
 		res = result.SetErrorResult(`Ошибка в базе данных`)

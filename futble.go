@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/gob"
 	"fmt"
+	"futble/check"
 	"futble/config"
 	"futble/constants"
 	"futble/routes"
@@ -25,13 +26,17 @@ func main() {
 	config.InitRandom()
 	config.InitDB(IsOpeningLocal, AdminName)
 	config.InitLoggers()
+	config.InitChannels()
 	err := constants.InitNations()
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	//	game.AddDatesInLeaderBoard()
-	//  game.AddDailyGames()
+	check.CheckNationsExist(constants.NationMatches)
+	check.CheckNationCorrect()
+	check.CheckClubCorrect()
+	// game.AddDailyGames()
+	//	go daemon.SearchingOpponent(config.In, config.Out)
 	gob.Register(config.User{})
 	routeAll := mux.NewRouter()
 	routes.GetAllHandlers(routeAll)
@@ -42,8 +47,8 @@ func main() {
 		APP_IP = "127.0.0.1"
 		APP_PORT = "8080"
 	} else {
-		APP_IP = os.Getenv("APP_IP")
-		APP_PORT = os.Getenv("APP_PORT")
+		APP_IP = "127.0.0.1"
+		APP_PORT = "8080"
 	}
 	fmt.Println("[SERVER] Server address is " + APP_IP + ":" + APP_PORT)
 	//	go http.ListenAndServeTLS(APP_IP+":"+APP_PORT, "cert.crt", "key.key", nil)

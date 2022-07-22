@@ -18,17 +18,20 @@ var UNLIMITED int = 3
 var GREY int = 0
 var YELLOW int = 1
 var GREEN int = 2
+var RED int = 3
 
 type PlayerData struct {
-	ID       int
-	Name     string
-	Surname  string
-	Club     string
-	League   string
-	Nation   string
-	Position string
-	Price    int
-	Birth    time.Time
+	ID          int
+	Name        string
+	Surname     string
+	Club        string
+	ClubShort   string
+	League      string
+	Nation      string
+	NationShort string
+	Position    string
+	Price       int
+	Birth       time.Time
 }
 
 type Player struct {
@@ -201,15 +204,18 @@ func CheckRecord(IDPlayer int, IDAnswer int) (AnswerType, error) {
 	Guess.ID = IDPlayer
 	Answer.ID = IDAnswer
 	db := config.ConnectDB()
-	query := `SELECT name, surname, birth, club, league, nation, position, price FROM players.data WHERE id = $1`
+	query := `SELECT name, surname, birth, players.data.club, league, players.data.nation, position, price, c.short, n.short FROM players.data
+		INNER JOIN players.club c ON c.club = players.data.club
+		INNER JOIN players.nation n ON n.country = players.data.nation
+		WHERE players.data.id = $1`
 	params := []any{IDPlayer}
-	err := db.QueryRow(query, params...).Scan(&Guess.Name, &Guess.Surname, &Guess.Birth, &Guess.Club, &Guess.League, &Guess.Nation, &Guess.Position, &Guess.Price)
+	err := db.QueryRow(query, params...).Scan(&Guess.Name, &Guess.Surname, &Guess.Birth, &Guess.Club, &Guess.League, &Guess.Nation, &Guess.Position, &Guess.Price, &Guess.ClubShort, &Guess.NationShort)
 	if err != nil {
 		report.ErrorSQLServer(nil, err, query, params...)
 		return a, err
 	}
 	params = []any{IDAnswer}
-	err = db.QueryRow(query, params...).Scan(&Answer.Name, &Answer.Surname, &Answer.Birth, &Answer.Club, &Answer.League, &Answer.Nation, &Answer.Position, &Answer.Price)
+	err = db.QueryRow(query, params...).Scan(&Answer.Name, &Answer.Surname, &Answer.Birth, &Answer.Club, &Answer.League, &Answer.Nation, &Answer.Position, &Answer.Price, &Answer.ClubShort, &Answer.NationShort)
 	if err != nil {
 		report.ErrorSQLServer(nil, err, query, params...)
 		return a, err
@@ -226,11 +232,9 @@ func CheckRecord(IDPlayer int, IDAnswer int) (AnswerType, error) {
 	} else {
 		a.AgeColor = GREY
 	}
-	a.Club = Guess.Club
+	a.Club = Guess.ClubShort
 	if Guess.Club == Answer.Club {
 		a.ClubColor = GREEN
-	} else if Guess.Club[0] == Answer.Club[0] {
-		a.ClubColor = YELLOW
 	} else {
 		a.ClubColor = GREY
 	}
@@ -239,19 +243,22 @@ func CheckRecord(IDPlayer int, IDAnswer int) (AnswerType, error) {
 	if err != nil {
 		return a, err
 	}
-	a.Nation = Guess.Nation
+	a.Nation = Guess.NationShort
 	a.NationColor = GetNationColor(Guess.Nation, Answer.Nation)
 	a.Position = Guess.Position
 	a.PositionColor = GetPositionColor(Guess.Position, Answer.Position)
 	a.Price = Guess.Price
-	Res := float64(Answer.Price) / float64(Guess.Price)
-	if Res > 0.9 && Res < 1.1 {
+	Res := abs(Answer.Price, Guess.Price)
+	if Res <= 5000000 {
 		a.PriceColor = GREEN
-	} else if Res > 0.7 && Res < 1.3 {
+	} else if Res <= 10000000 {
 		a.PriceColor = YELLOW
-	} else {
+	} else if Res <= 50000000 {
 		a.PriceColor = GREY
+	} else {
+		a.PriceColor = RED
 	}
+
 	return a, nil
 }
 
@@ -301,6 +308,9 @@ func GetLeagueColor(Guess string, Answer string) (int, error) {
 	if abs(GuessLeague, AnswerLeague) == 1 {
 		return YELLOW, nil
 	}
+	if GuessLeague/100 != AnswerLeague/100 {
+		return RED, nil
+	}
 	return GREY, nil
 }
 
@@ -333,12 +343,12 @@ func GetPositionColor(Guess string, Answer string) int {
 
 var Matches = map[string][]string{
 	"GK":  {},
-	"LD":  {"LWB", "CD"},
-	"CD":  {"LB", "RD", "CDM"},
-	"RD":  {"RWB", "CD"},
-	"LWB": {"LD", "LM", "CDM"},
-	"CDM": {"LWB", "RWB", "CD", "CM"},
-	"RWB": {"RD", "RM", "CDM"},
+	"LB":  {"LWB", "CB"},
+	"CB":  {"LB", "RB", "CDM"},
+	"RB":  {"RWB", "CB"},
+	"LWB": {"LB", "LM", "CDM"},
+	"CDM": {"LWB", "RWB", "CB", "CM"},
+	"RWB": {"RB", "RM", "CDM"},
 	"LM":  {"LWB", "LW", "CM"},
 	"CM":  {"LM", "RM", "CDM", "CAM"},
 	"RM":  {"RWB", "RW", "CM"},

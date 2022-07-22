@@ -311,3 +311,75 @@ User-Agent: PostmanRuntime/7.29.0
 
 ERROR 2022/06/19 08:50:40 report.go:55: ——————————————————————————————————————————————————————————————————————
 ERROR 2022/06/19 08:50:40 report.go:56: 
+ERROR 2022/06/29 12:50:29 report.go:54: 29.06.2022 12:50:29
+D:/futble/game/check.go:19
+pq: got 1 parameters but the statement requires 0
+
+SELECT id, nation FROM players.data
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/06/29 12:50:29 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/06/29 12:50:29 report.go:56: 
+ERROR 2022/07/01 16:57:51 report.go:54: 01.07.2022 16:57:51
+D:/futble/game/rating.go:31
+pq: ошибка синтаксиса в конце
+
+SELECT EXISTS(SELECT 1 FROM users.invites WHERE user1 = 2 AND searching = TRUE
+
+&pq.Error{Severity:"ОШИБКА", Code:"42601", Message:"ошибка синтаксиса в конце", Detail:"", Hint:"", Position:"80", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"scan.l", Line:"1172", Routine:"scanner_yyerror"}
+
+ERROR 2022/07/01 16:57:51 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/01 16:57:51 report.go:56: 
+ERROR 2022/07/01 17:02:41 report.go:54: 01.07.2022 17:02:41
+D:/futble/game/rating.go:66
+sql: converting argument $1 type: unsupported type func() time.Time, a func
+
+UPDATE users.invites SET searching = false, finish_search = '0x10b860' WHERE user1 = 2
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/07/01 17:02:41 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/01 17:02:41 report.go:56: 
+ERROR 2022/07/01 17:04:37 report.go:54: 01.07.2022 17:04:37
+D:/futble/game/rating.go:66
+pq: ошибка синтаксиса (примерное положение: "ORDER")
+
+UPDATE users.invites SET searching = false, finish_search = '2022-07-01 17:04:37.112' WHERE user1 = 2 ORDER BY id DESC LIMIT 1
+
+&pq.Error{Severity:"ОШИБКА", Code:"42601", Message:"ошибка синтаксиса (примерное положение: \"ORDER\")", Detail:"", Hint:"", Position:"81", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"scan.l", Line:"1180", Routine:"scanner_yyerror"}
+
+ERROR 2022/07/01 17:04:37 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/01 17:04:37 report.go:56: 
+ERROR 2022/07/12 23:36:31 report.go:54: 12.07.2022 23:36:31
+D:/futble/game/game.go:295
+sql: no rows in result set
+
+SELECT place FROM players.league WHERE league = 'NLD'
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/07/12 23:36:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/12 23:36:31 report.go:56: 
+ERROR 2022/07/12 23:36:31 report.go:54: 12.07.2022 23:36:31
+D:/futble/game/game.go:169
+sql: no rows in result set
+
+ERROR 2022/07/12 23:36:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/12 23:36:31 report.go:56: 
+ERROR 2022/07/12 23:36:43 report.go:54: 12.07.2022 23:36:43
+D:/futble/game/game.go:295
+sql: no rows in result set
+
+SELECT place FROM players.league WHERE league = 'NLD'
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/07/12 23:36:43 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/12 23:36:43 report.go:56: 
+ERROR 2022/07/12 23:36:43 report.go:54: 12.07.2022 23:36:43
+D:/futble/game/game.go:169
+sql: no rows in result set
+
+ERROR 2022/07/12 23:36:43 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/12 23:36:43 report.go:56: 

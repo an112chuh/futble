@@ -33,6 +33,17 @@ func UnlimitedGame(user config.User) (res result.ResultInfo) {
 		res = result.SetErrorResult(`Ошибка при получении данных об игре`)
 		return
 	}
+	Finished := CheckCurrentGameFinished(IDGame)
+	GameInfo.GameResult = new(string)
+	if Finished == LOSE {
+		*GameInfo.GameResult = `GAME LOSE`
+	}
+	if Finished == WIN {
+		*GameInfo.GameResult = `GAME WIN`
+	}
+	if Finished == NOTHING {
+		*GameInfo.GameResult = `GAME CONTINUE`
+	}
 	GameInfo.GameMode = UNLIMITED
 	res.Done = true
 	res.Items = GameInfo
@@ -47,6 +58,11 @@ func UnlimitedGameAnswer(user config.User, IDGuess int) (res result.ResultInfo) 
 	}
 	if IDGame == 0 {
 		res = result.SetErrorResult(`Данной игры не существует`)
+		return
+	}
+	exists := CheckPlayerIDExist(IDGuess)
+	if !exists {
+		res = result.SetErrorResult(`This player doesn't exist`)
 		return
 	}
 	res, GameResult, err := PutGuess(IDGuess, IDGame)

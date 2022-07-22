@@ -12,8 +12,9 @@ var ErrorLog *log.Logger
 var AccessLog *log.Logger
 
 const (
-	Default Rights = 1
-	Admin   Rights = 2
+	NotLogged Rights = 0
+	Default   Rights = 1
+	Admin     Rights = 2
 )
 
 type User struct {

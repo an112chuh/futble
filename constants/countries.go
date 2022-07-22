@@ -2,7 +2,6 @@ package constants
 
 import (
 	"encoding/csv"
-	"fmt"
 	"os"
 )
 
@@ -23,6 +22,6 @@ func InitNations() error {
 	for i := range records {
 		NationMatches[records[i][1]] = append(NationMatches[records[i][1]], records[i][3])
 	}
-	fmt.Println(NationMatches)
+	//	fmt.Println(NationMatches)
 	return nil
 }
