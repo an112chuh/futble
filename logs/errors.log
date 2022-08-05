@@ -383,3 +383,327 @@ sql: no rows in result set
 
 ERROR 2022/07/12 23:36:43 report.go:55: ——————————————————————————————————————————————————————————————————————
 ERROR 2022/07/12 23:36:43 report.go:56: 
+ERROR 2022/07/27 23:23:19 report.go:54: 27.07.2022 23:23:19
+D:/futble/daemon/search.go:32
+open /logs/balancer.txt: The system cannot find the path specified.
+
+ERROR 2022/07/27 23:23:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/27 23:23:19 report.go:56: 
+ERROR 2022/07/27 23:26:19 report.go:54: 27.07.2022 23:26:19
+D:/futble/daemon/search.go:32
+open /logs/balancer.txt: The system cannot find the path specified.
+
+ERROR 2022/07/27 23:26:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/27 23:26:19 report.go:56: 
+ERROR 2022/07/31 02:42:17 report.go:54: 31.07.2022 02:42:17
+D:/futble/game/auth.go:148
+securecookie: expired timestamp
+
+GET /api/start_random HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+
+ERROR 2022/07/31 02:42:17 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:42:17 report.go:56: 
+ERROR 2022/07/31 02:44:19 report.go:54: 31.07.2022 02:44:19
+D:/futble/game/rating.go:55
+sql: no rows in result set
+
+SELECT trophies FROM users.trophies WHERE id_user = 85
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/07/31 02:44:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:44:19 report.go:56: 
+ERROR 2022/07/31 02:47:20 report.go:54: 31.07.2022 02:47:20
+D:/futble/game/auth.go:148
+securecookie: expired timestamp
+
+GET /api/start_random HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+
+ERROR 2022/07/31 02:47:20 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:47:20 report.go:56: 
+ERROR 2022/07/31 02:47:34 report.go:54: 31.07.2022 02:47:34
+D:/futble/game/auth.go:31
+securecookie: expired timestamp
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+
+ERROR 2022/07/31 02:47:34 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:47:34 report.go:56: 
+ERROR 2022/07/31 02:47:36 report.go:54: 31.07.2022 02:47:36
+D:/futble/game/auth.go:31
+securecookie: expired timestamp
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+
+ERROR 2022/07/31 02:47:36 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:47:36 report.go:56: 
+ERROR 2022/07/31 02:47:40 report.go:54: 31.07.2022 02:47:40
+D:/futble/game/auth.go:148
+securecookie: expired timestamp
+
+GET /api/start_random HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36
+
+ERROR 2022/07/31 02:47:40 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:47:40 report.go:56: 
+ERROR 2022/07/31 02:53:54 report.go:54: 31.07.2022 02:53:54
+D:/futble/game/auth.go:40
+invalid character 'c' after object key
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 48
+Content-Type: text/plain
+Postman-Token: f23b3238-f141-4317-a088-310c40b99abe
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 02:53:54 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:53:54 report.go:56: 
+ERROR 2022/07/31 02:54:04 report.go:54: 31.07.2022 02:54:04
+D:/futble/game/rating.go:47
+sql: no rows in result set
+
+SELECT trophies FROM users.trophies WHERE id_user = 87
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/07/31 02:54:04 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:54:04 report.go:56: 
+ERROR 2022/07/31 02:55:19 report.go:54: 31.07.2022 02:55:19
+D:/futble/game/rating.go:47
+sql: no rows in result set
+
+SELECT trophies FROM users.trophies WHERE id_user = 87
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/07/31 02:55:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 02:55:19 report.go:56: 
+ERROR 2022/07/31 06:18:15 report.go:54: 31.07.2022 06:18:15
+D:/futble/game/auth.go:40
+invalid character 'c' after object key
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 49
+Content-Type: text/plain
+Postman-Token: 134ed3e7-215f-4aec-b065-3b134641bfde
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 06:18:15 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 06:18:15 report.go:56: 
+ERROR 2022/07/31 06:19:31 report.go:54: 31.07.2022 06:19:31
+D:/futble/game/auth.go:41
+invalid character 'c' after object key
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 49
+Content-Type: text/plain
+Cookie: cookie-name=MTY1OTIzNzQ5NXxTVXFHdWpOWkEtcDc4SWtzbmROV2Jma1RCakdxdlczRTM2ZF9XdElxUFRkTHQ5M0loZVFXbl9YWS03Q0ZrX3lQVzJRWk5RNmFwNEFobFNka3poLVRnaVhhX0NtcFQ1dm1nd0J2V05pM3c0Y1QzTC1pdWZtLTY0UDNQQ1FuaWRQX3hHRjB6V0hKV0toZHcxZXc2a3FRR2hiVVJnd1VwTUR4Tk9wMEJiN1VsY2U4SmZfZnRGcFN3NlVac2h0RjVFMzNFQmFhZm1wT09xMTkwVDNuQWc9PXwv2v-WVFoxeCOXf_b3H5ZcTt55T-4RfpOqCa_5YD2EKA==
+Postman-Token: 59a67f15-dd66-4ddc-9b47-52ea79382ecd
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 06:19:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 06:19:31 report.go:56: 
+ERROR 2022/07/31 06:20:11 report.go:54: 31.07.2022 06:20:11
+D:/futble/game/auth.go:138
+pq: ошибка синтаксиса (примерное положение: "=")
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 50
+Content-Type: text/plain
+Cookie: cookie-name=MTY1OTIzNzQ5NXxTVXFHdWpOWkEtcDc4SWtzbmROV2Jma1RCakdxdlczRTM2ZF9XdElxUFRkTHQ5M0loZVFXbl9YWS03Q0ZrX3lQVzJRWk5RNmFwNEFobFNka3poLVRnaVhhX0NtcFQ1dm1nd0J2V05pM3c0Y1QzTC1pdWZtLTY0UDNQQ1FuaWRQX3hHRjB6V0hKV0toZHcxZXc2a3FRR2hiVVJnd1VwTUR4Tk9wMEJiN1VsY2U4SmZfZnRGcFN3NlVac2h0RjVFMzNFQmFhZm1wT09xMTkwVDNuQWc9PXwv2v-WVFoxeCOXf_b3H5ZcTt55T-4RfpOqCa_5YD2EKA==
+Postman-Token: ad4427c2-d54b-4155-b4d1-f5f922bffdb1
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 06:20:11 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 06:20:11 report.go:56: 
+ERROR 2022/07/31 06:20:37 report.go:54: 31.07.2022 06:20:37
+D:/futble/game/auth.go:138
+sql: no rows in result set
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 50
+Content-Type: text/plain
+Cookie: cookie-name=MTY1OTIzNzQ5NXxTVXFHdWpOWkEtcDc4SWtzbmROV2Jma1RCakdxdlczRTM2ZF9XdElxUFRkTHQ5M0loZVFXbl9YWS03Q0ZrX3lQVzJRWk5RNmFwNEFobFNka3poLVRnaVhhX0NtcFQ1dm1nd0J2V05pM3c0Y1QzTC1pdWZtLTY0UDNQQ1FuaWRQX3hHRjB6V0hKV0toZHcxZXc2a3FRR2hiVVJnd1VwTUR4Tk9wMEJiN1VsY2U4SmZfZnRGcFN3NlVac2h0RjVFMzNFQmFhZm1wT09xMTkwVDNuQWc9PXwv2v-WVFoxeCOXf_b3H5ZcTt55T-4RfpOqCa_5YD2EKA==
+Postman-Token: f647a28a-05fe-48b9-a4e6-3cc7e21192aa
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 06:20:37 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 06:20:37 report.go:56: 
+ERROR 2022/07/31 06:21:53 report.go:54: 31.07.2022 06:21:53
+D:/futble/game/auth.go:138
+sql: no rows in result set
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 52
+Content-Type: text/plain
+Cookie: cookie-name=MTY1OTIzNzY4Nnw4N2RaSWFsVGJuOTR4SE1PM3BXYkVSWTFYNmtCeHpTMDc2dlAxUzhocExkS2h3OE0wMGtJQjk2OWlrSnlNX3ZBaWlQR2s0MnFyOEVuYk9XbkQzcUVKMHlJTk9FQUhnekZfZVBtNHEycVhObVhKTWo4ZHhVY3pETkk2ZzFmLTFwUGhENnBvOTZFalFDMWlxWkVVNE05Z0g5RXFlaFFfanpsdHhEWmRhS1B6bWZDZUJTMVJoMHpOQ192MFlIMGo5OGhuempPY2xNZUZKVXY0Slc4X0E9PXzY-XXq8TxQsxB6TfRVV-a3-a_iMpBF_-L0DGknlLRIrA==
+Postman-Token: f666da83-c50a-4675-b759-78ec54aa95f8
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 06:21:53 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 06:21:53 report.go:56: 
+ERROR 2022/07/31 06:24:16 report.go:54: 31.07.2022 06:24:16
+D:/futble/game/auth.go:138
+sql: no rows in result set
+
+UPDATE users.accounts SET login = 'adacffcf', not_logged = false, password = 1529452802, rights = '1' WHERE id = 91
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+GET /api/register HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 53
+Content-Type: text/plain
+Postman-Token: bf5f2ed2-7415-4c35-b9ae-e02b0f1da6b5
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 06:24:16 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 06:24:16 report.go:56: 
+ERROR 2022/07/31 15:38:02 report.go:54: 31.07.2022 15:38:02
+D:/futble/game/action.go:47
+sql: no rows in result set
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 53
+Content-Type: text/plain
+Cookie: cookie-name=MTY1OTI3MTA2OHxHVGw0LTRNalBkd1I5U2tNYUMtWkZQeEN5RG9jUDR6b1FSbjJCTjQtcHFYaUhfOVdFbml0TkNXQmRORFlmWlBUVUFoQ3AzZFZocGYtRlMtUTdLbjJBME1IM2tjZDFTUktnZGptMnJNcGZIbmhOQ2lyUHl4bEk2NW94OEFfZUlTRHZpRzRmRWNuMHhmZWNLQjVIUGNiWUcyNVVienBabC10b1Fhak1uWlNyV1VhWk15SVN4LUExVmdXdVZNUDB1QkFLRUY0clRsS192R1VhbkpLfAa0ESBZps-eMeyR74HuCAA7n3Lf7s-36J3BeMc4K24h
+Postman-Token: 162ea8ea-4c05-4a5d-bebf-959a3e71cab6
+User-Agent: PostmanRuntime/7.29.0
+
+ERROR 2022/07/31 15:38:02 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 15:38:02 report.go:56: 
+ERROR 2022/07/31 20:10:42 report.go:54: 31.07.2022 20:10:42
+D:/futble/check/check.go:143
+pq: отношение "players_data" не существует
+
+SELECT id FROM players_data
+
+&pq.Error{Severity:"ОШИБКА", Code:"42P01", Message:"отношение \"players_data\" не существует", Detail:"", Hint:"", Position:"16", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"1384", Routine:"parserOpenTable"}
+
+ERROR 2022/07/31 20:10:42 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/07/31 20:10:42 report.go:56: 
+ERROR 2022/08/05 05:54:20 report.go:54: 05.08.2022 05:54:20
+D:/futble/game/rating.go:170
+pq: отношение "users.invires" не существует
+
+UPDATE users.invires SET searching = FALSE WHERE user1 = 103 OR 104
+
+&pq.Error{Severity:"ОШИБКА", Code:"42P01", Message:"отношение \"users.invires\" не существует", Detail:"", Hint:"", Position:"8", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"1363", Routine:"parserOpenTable"}
+
+ERROR 2022/08/05 05:54:20 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/05 05:54:20 report.go:56: 
