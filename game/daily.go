@@ -179,12 +179,12 @@ func AddDailyStatWin(IDUser int, IDGame int) {
 		return
 	}
 	if MaxStreak == CurrentStreak {
-		query = `UPDATE users.daily SET total = total + 1, success = success + 1, percent = (success+1)/(total+1),
+		query = `UPDATE users.daily SET total = total + 1, success = success + 1, percent = (success::float+1)/(total+1),
 		res` + strconv.Itoa(NumOfGuesses) + ` = res` + strconv.Itoa(NumOfGuesses) + ` + 1, 
 		cur_streak = cur_streak + 1, max_streak = max_streak + 1 
 		WHERE id_user = $1`
 	} else {
-		query = `UPDATE users.daily SET total = total + 1, success = success + 1, percent = (success+1)/(total+1),
+		query = `UPDATE users.daily SET total = total + 1, success = success + 1, percent = (success::float+1)/(total+1),
 		res` + strconv.Itoa(NumOfGuesses) + ` = res` + strconv.Itoa(NumOfGuesses) + ` + 1, 
 		cur_streak = cur_streak + 1 
 		WHERE id_user = $1`
@@ -218,16 +218,16 @@ func AddDailyStatLose(IDUser int) {
 	}
 	if !exists {
 		query = `INSERT INTO users.daily (id_user, total, success, percent, res1, res2, res3, 
-			res4, res5, res6, res7, res8, best_time) 
-			VALUES ($1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, $2)`
-		params = []any{IDUser, time.Second * 0}
+			res4, res5, res6, res7, res8) 
+			VALUES ($1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)`
+		params = []any{IDUser}
 		_, err = db.Exec(query, params...)
 		if err != nil {
 			report.ErrorSQLServer(nil, err, query, params...)
 			return
 		}
 	}
-	query = `UPDATE users.daily SET total = total + 1, percent = (success+1)/(total+1), cur_streak = 0 WHERE id_user = $1`
+	query = `UPDATE users.daily SET total = total + 1, percent = (success::float)/(total+1), cur_streak = 0 WHERE id_user = $1`
 	params = []any{IDUser}
 	_, err = db.Exec(query, params...)
 	if err != nil {

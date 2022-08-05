@@ -36,10 +36,15 @@ func RegHandler(w http.ResponseWriter, r *http.Request) {
 	b, _ := io.ReadAll(r.Body)
 	r.Body = io.NopCloser(bytes.NewReader(b))
 	err = json.Unmarshal(b, &data)
+	var res result.ResultInfo
 	if err != nil {
 		report.ErrorServer(r, err)
+		res = result.SetErrorResult(`Внутренняя ошибка`)
+		result.ReturnJSON(w, &res)
+		return
 	}
-	res, user := Reg(r, data)
+	user := IsLogin(w, r)
+	res, user = Reg(r, data, user.ID)
 	if res.Done {
 		session.Values["user"] = user
 		err = session.Save(r, w)
@@ -87,7 +92,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	result.ReturnJSON(w, &res)
 }
 
-func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.User) {
+func Reg(r *http.Request, data AccountData, IDUser int) (res result.ResultInfo, user config.User) {
 	db := config.ConnectDB()
 	if data.Login == `newman` {
 		Count := 0
@@ -117,14 +122,45 @@ func Reg(r *http.Request, data AccountData) (res result.ResultInfo, user config.
 	}
 	Hash := HashCreation(data.Password)
 	var ID int
-	query = `INSERT INTO users.accounts (login, not_logged, password, rights) VALUES ($1, $2, $3, $4) RETURNING id`
-	params := []any{data.Login, data.IsLogged, Hash, user.Rights}
-	err = db.QueryRow(query, params...).Scan(&ID)
-	if err != nil {
-		report.ErrorServer(r, err)
-		return
+	if data.IsLogged {
+		query = `INSERT INTO users.accounts (login, not_logged, password, rights) VALUES ($1, $2, $3, $4) RETURNING id`
+		params := []any{data.Login, data.IsLogged, Hash, user.Rights}
+		err = db.QueryRow(query, params...).Scan(&ID)
+		if err != nil {
+			report.ErrorServer(r, err)
+			return
+		}
+		user.ID = ID
+	} else {
+		var exists bool
+		query = `SELECT EXISTS(SELECT 1 FROM users.accounts WHERE id = $1 AND login not like 'newman%')`
+		params := []any{IDUser}
+		err = db.QueryRow(query, params...).Scan(&exists)
+		if err != nil {
+			report.ErrorSQLServer(r, err, query, params...)
+			res = result.SetErrorResult(`Server Error`)
+			return
+		}
+		if exists {
+			res = result.SetErrorResult(`You are already in account`)
+			return
+		}
+		query = `UPDATE users.accounts SET login = $1, not_logged = false, password = $2, rights = $3 WHERE id = $4`
+		params = []any{data.Login, Hash, user.Rights, IDUser}
+		_, err = db.Exec(query, params...)
+		if err != nil {
+			report.ErrorSQLServer(r, err, query, params...)
+			return
+		}
+		query = `INSERT INTO users.trophies (id_user, trophies) VALUES ($1, 0)`
+		params = []any{IDUser}
+		_, err = db.Exec(query, params...)
+		if err != nil {
+			report.ErrorSQLServer(r, err, query, params...)
+			return
+		}
+		user.ID = IDUser
 	}
-	user.ID = ID
 	user.Authenticated = true
 	user.Username = data.Login
 	res.Done = true
@@ -154,7 +190,7 @@ func IsLogin(w http.ResponseWriter, r *http.Request) (user config.User) {
 		data.IsLogged = true
 		data.Login = `newman`
 		var res result.ResultInfo
-		res, user = Reg(r, data)
+		res, user = Reg(r, data, 0)
 		if res.Done {
 			session.Values["user"] = user
 			err = session.Save(r, w)
@@ -164,10 +200,10 @@ func IsLogin(w http.ResponseWriter, r *http.Request) (user config.User) {
 				return
 			}
 		} else {
-			result.ReturnJSON(w, &res)
+			//	result.ReturnJSON(w, &res)
 			return
 		}
-		result.ReturnJSON(w, &res)
+		//result.ReturnJSON(w, &res)
 	}
 	SetOnline(user)
 	return user

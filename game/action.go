@@ -55,6 +55,11 @@ func GameHandler(w http.ResponseWriter, r *http.Request) {
 	case UNLIMITED:
 		res = UnlimitedGame(user)
 	case RATING:
+		if user.Rights == config.NotLogged {
+			res = result.SetErrorResult(NOT_LOGGED_ERROR)
+			result.ReturnJSON(w, &res)
+			return
+		}
 		res = RatingGame(user)
 
 	}
@@ -87,6 +92,13 @@ func GameAnswerHandler(w http.ResponseWriter, r *http.Request) {
 	switch GameMode {
 	case DAILY:
 		res = DailyGameAnswer(user, IDAnswer)
+	case RATING:
+		if user.Rights == config.NotLogged {
+			res = result.SetErrorResult(NOT_LOGGED_ERROR)
+			result.ReturnJSON(w, &res)
+			return
+		}
+		res = RatingGameAnswer(user, IDAnswer)
 	case UNLIMITED:
 		res = UnlimitedGameAnswer(user, IDAnswer)
 	}

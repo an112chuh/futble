@@ -6,6 +6,7 @@ import (
 	"futble/check"
 	"futble/config"
 	"futble/constants"
+	"futble/daemon"
 	"futble/routes"
 	"net/http"
 	"os"
@@ -35,8 +36,11 @@ func main() {
 	check.CheckNationsExist(constants.NationMatches)
 	check.CheckNationCorrect()
 	check.CheckClubCorrect()
+	check.CheckLeagueCorrect()
+	check.DownloadIDs()
 	// game.AddDailyGames()
-	//	go daemon.SearchingOpponent(config.In, config.Out)
+	go daemon.SearchList.SearchingOpponent(daemon.SearchingActive)
+	//	go daemon.ClearDatabase()
 	gob.Register(config.User{})
 	routeAll := mux.NewRouter()
 	routes.GetAllHandlers(routeAll)
@@ -51,7 +55,6 @@ func main() {
 		APP_PORT = "8080"
 	}
 	fmt.Println("[SERVER] Server address is " + APP_IP + ":" + APP_PORT)
-	//	go http.ListenAndServeTLS(APP_IP+":"+APP_PORT, "cert.crt", "key.key", nil)
 	http.ListenAndServe(APP_IP+":"+APP_PORT, nil)
 	fmt.Println("[SERVER] Server is started")
 	defer config.Db.Close()

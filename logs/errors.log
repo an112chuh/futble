@@ -697,13 +697,3 @@ SELECT id FROM players_data
 
 ERROR 2022/07/31 20:10:42 report.go:55: ——————————————————————————————————————————————————————————————————————
 ERROR 2022/07/31 20:10:42 report.go:56: 
-ERROR 2022/08/05 05:54:20 report.go:54: 05.08.2022 05:54:20
-D:/futble/game/rating.go:170
-pq: отношение "users.invires" не существует
-
-UPDATE users.invires SET searching = FALSE WHERE user1 = 103 OR 104
-
-&pq.Error{Severity:"ОШИБКА", Code:"42P01", Message:"отношение \"users.invires\" не существует", Detail:"", Hint:"", Position:"8", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"1363", Routine:"parserOpenTable"}
-
-ERROR 2022/08/05 05:54:20 report.go:55: ——————————————————————————————————————————————————————————————————————
-ERROR 2022/08/05 05:54:20 report.go:56: 

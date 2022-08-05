@@ -23,11 +23,10 @@ func GetDailyHandler(r *mux.Router) {
 	r.HandleFunc("/api/unlimited/new", game.UnlimitedNewHandler)
 	r.HandleFunc("/api/unlimited/avg_time", game.UnlimitedAvgHandler)
 
-	//	r.HandleFunc("/api/rating/answer", game.RatingAnswerHandler)
-
 }
 
 func GetRatingHandler(r *mux.Router) {
-	r.HandleFunc("/api/start_random", game.SearchRatingGameHandler)
+	r.HandleFunc("/api/rating/send_invite", game.SearchRatingGameHandler)
+	r.HandleFunc("/api/rating/score", game.RatingScoreHandler)
 	//	r.HandleFunc("/api/cancel_random", game.CancelSearchRatingGameHandler)
 }

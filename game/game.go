@@ -2,6 +2,7 @@ package game
 
 import (
 	"database/sql"
+	"futble/check"
 	"futble/config"
 	"futble/constants"
 	"futble/report"
@@ -73,68 +74,60 @@ func CreateGame(Type int, user config.User) (int, error) {
 		}
 		return ID, nil
 	case RATING:
-		var CountPlayers int
-		var IsLogged bool
-		query := `SELECT not_logged FROM users.accounts WHERE id = $1`
+		var IDGame, tries int
+		query := `SELECT id_game, tries FROM games.rating WHERE id_user = $1 ORDER BY id desc LIMIT 1`
 		params := []any{user.ID}
-		err := db.QueryRow(query, params...).Scan(&IsLogged)
+		err := db.QueryRow(query, params...).Scan(&IDGame, &tries)
 		if err != nil {
-			report.ErrorServer(nil, err)
+			report.ErrorSQLServer(nil, err, query, params...)
 			return -1, err
 		}
-		if !IsLogged {
-			return -2, err
-		}
-		query = `SELECT COUNT(*) FROM players.data`
-		err = db.QueryRow(query).Scan(&CountPlayers)
-		if err != nil {
-			report.ErrorServer(nil, err)
+		var IDAnswer int
+		query = `SELECT id_answer FROM games.rating_answers WHERE id_game = $1 AND ans_in_game = $2`
+		params = []any{IDGame, tries + 1}
+		err = db.QueryRow(query, params...).Scan(&IDAnswer)
+		if err != nil && err != sql.ErrNoRows {
+			report.ErrorSQLServer(nil, err, query, params...)
 			return -1, err
 		}
-		IDAnswer := rand.Intn(CountPlayers)
-		query = `INSERT INTO games.list (game_type, id_user, id_answer) VALUES (2, $1, $2) RETURNING id`
+		if err == sql.ErrNoRows {
+			IDAnswer = CreateNewAnswer(IDGame, tries+1)
+		}
+		query = `INSERT INTO games.list (game_type, id_user, id_answer, active) VALUES (2, $1, $2, TRUE) RETURNING id`
 		params = []any{user.ID, IDAnswer}
 		err = db.QueryRow(query, params...).Scan(&ID)
 		if err != nil {
 			report.ErrorServer(nil, err)
 			return -1, err
 		}
-		var DayFinish time.Time
-		query = `SELECT day_finish FROM games.daily_answers WHERE day_start < $1 AND day_finish > $1`
-		params = []any{time.Now()}
-		err = db.QueryRow(query, params...).Scan(&DayFinish)
-		if err != nil {
-			report.ErrorServer(nil, err)
-			return -1, err
-		}
-		query = `INSERT INTO games.rating (id_game, id_user, end_time) VALUES ($1, $2, $3)`
-		params = []any{ID, user.ID, DayFinish}
-		_, err = db.Exec(query, params...)
-		if err != nil {
-			report.ErrorServer(nil, err)
-			return -1, err
-		}
 		return ID, nil
 	case UNLIMITED:
-		var CountPlayers int
-		query := `SELECT COUNT(*) FROM players.data`
-		err := db.QueryRow(query).Scan(&CountPlayers)
-		if err != nil {
-			report.ErrorServer(nil, err)
-			return -1, err
-		}
-		IDAnswer := rand.Intn(CountPlayers)
-		query = `INSERT INTO games.list (game_type, id_user, id_answer, active) VALUES (3, $1, $2, TRUE) RETURNING id`
+		PlayerPos := rand.Intn(len(check.IDs))
+		IDAnswer := check.IDs[PlayerPos]
+		query := `INSERT INTO games.list (game_type, id_user, id_answer, active) VALUES (3, $1, $2, TRUE) RETURNING id`
 		params := []any{user.ID, IDAnswer}
-		err = db.QueryRow(query, params...).Scan(&ID)
+		err := db.QueryRow(query, params...).Scan(&ID)
 		if err != nil {
 			report.ErrorServer(nil, err)
 			return -1, err
 		}
 		return ID, nil
-
 	}
 	return -1, nil
+}
+
+func CreateNewAnswer(IDGame int, AnsInGame int) int {
+	db := config.ConnectDB()
+	PlayerPos := rand.Intn(len(check.IDs))
+	IDAnswer := check.IDs[PlayerPos]
+	query := `INSERT INTO games.rating_answers (id_game, ans_in_game, id_answer) VALUES ($1, $2, $3)`
+	params := []any{IDGame, AnsInGame, IDAnswer}
+	_, err := db.Exec(query, params...)
+	if err != nil {
+		report.ErrorSQLServer(nil, err, query, params...)
+		return -1
+	}
+	return IDAnswer
 }
 
 func GameInfoCollect(ID int) (Game, error) {
@@ -229,8 +222,10 @@ func CheckRecord(IDPlayer int, IDAnswer int) (AnswerType, error) {
 		a.AgeColor = GREEN
 	} else if abs(a.Age, AnswerAge) == 1 {
 		a.AgeColor = YELLOW
-	} else {
+	} else if abs(a.Age, AnswerAge) <= 10 {
 		a.AgeColor = GREY
+	} else {
+		a.AgeColor = RED
 	}
 	a.Club = Guess.ClubShort
 	if Guess.Club == Answer.Club {
@@ -323,6 +318,22 @@ func GetNationColor(Guess string, Answer string) int {
 			return YELLOW
 		}
 	}
+	var GuessContinent, AnswerContinent int
+	db := config.ConnectDB()
+	query := `SELECT continent FROM players.nation WHERE country = $1`
+	params := []any{Guess}
+	err := db.QueryRow(query, params...).Scan(&GuessContinent)
+	if err != nil {
+		report.ErrorServer(nil, err)
+	}
+	params = []any{Answer}
+	err = db.QueryRow(query, params...).Scan(&AnswerContinent)
+	if err != nil {
+		report.ErrorServer(nil, err)
+	}
+	if GuessContinent != AnswerContinent {
+		return RED
+	}
 	return GREY
 }
 
@@ -342,10 +353,10 @@ func GetPositionColor(Guess string, Answer string) int {
 }
 
 var Matches = map[string][]string{
-	"GK":  {},
-	"LB":  {"LWB", "CB"},
-	"CB":  {"LB", "RB", "CDM"},
-	"RB":  {"RWB", "CB"},
+	"GK":  {"LB", "CB", "RB"},
+	"LB":  {"LWB", "CB", "GK"},
+	"CB":  {"LB", "RB", "CDM", "GK"},
+	"RB":  {"RWB", "CB", "GK"},
 	"LWB": {"LB", "LM", "CDM"},
 	"CDM": {"LWB", "RWB", "CB", "CM"},
 	"RWB": {"RB", "RM", "CDM"},
