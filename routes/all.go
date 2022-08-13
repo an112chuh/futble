@@ -26,7 +26,18 @@ func GetDailyHandler(r *mux.Router) {
 }
 
 func GetRatingHandler(r *mux.Router) {
-	r.HandleFunc("/api/rating/send_invite", game.SearchRatingGameHandler)
+	r.HandleFunc("/api/rating/start_search", game.SearchRatingGameHandler)
 	r.HandleFunc("/api/rating/score", game.RatingScoreHandler)
-	//	r.HandleFunc("/api/cancel_random", game.CancelSearchRatingGameHandler)
+	r.HandleFunc("/api/rating/stats", game.RatingGameStatsHandler)
+	r.HandleFunc("/api/rating/coins", game.RatingCoinsHandler)
+	r.HandleFunc("/api/rating/standings", game.RatingStandingsHandler)
+	r.HandleFunc("/api/rating/send_invite", game.RatingSendInviteHandler)
+	r.HandleFunc("/api/rating/notifications", game.RatingNotificationsHandler)
+	r.HandleFunc("/api/rating/confirm_invite", game.RatingConfirmInviteHandler)
+	r.HandleFunc("/api/rating/reject_invite", game.RatingRejectInviteHandler)
+	r.HandleFunc("/api/rating/user_search", game.RatingUserSearchHandler)
+	r.HandleFunc("/api/rating/result", game.RatingResultHandler)
+	r.HandleFunc("/api/rating/hint_prices", game.RatingHintPricesHandler)
+	r.HandleFunc("/api/rating/hint", game.RatingHintHandler)
+
 }

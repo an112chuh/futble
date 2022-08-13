@@ -697,3 +697,237 @@ SELECT id FROM players_data
 
 ERROR 2022/07/31 20:10:42 report.go:55: ——————————————————————————————————————————————————————————————————————
 ERROR 2022/07/31 20:10:42 report.go:56: 
+ERROR 2022/08/05 23:55:15 report.go:54: 05.08.2022 23:55:15
+D:/futble/game/rating.go:560
+pq: оператор не существует: integer == unknown
+
+SELECT created_at FROM games.rating_pairs WHERE id == 3
+
+&pq.Error{Severity:"ОШИБКА", Code:"42883", Message:"оператор не существует: integer == unknown", Detail:"", Hint:"Оператор с данными именем и типами аргументов не найден. Возможно, вам следует добавить явные приведения типов.", Position:"52", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_oper.c", Line:"656", Routine:"op_error"}
+
+ERROR 2022/08/05 23:55:15 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/05 23:55:15 report.go:56: 
+ERROR 2022/08/07 05:26:57 report.go:54: 07.08.2022 05:26:57
+D:/futble/game/rating.go:530
+pq: got 1 parameters but the statement requires 0
+
+placeholder is undefined: SELECT * from (SELECT trophies, users.accounts.id, login, online, RANK() OVER 
+		(ORDER BY trophies DESC, updated_at ASC) AS number FROM users.trophies
+		INNER JOIN users.accounts ON users.accounts.id = users.trophies.id_user) as abc limit 15 offset 0
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/08/07 05:26:57 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/07 05:26:57 report.go:56: 
+ERROR 2022/08/09 19:48:44 report.go:54: 09.08.2022 19:48:44
+D:/futble/game/auth.go:186
+securecookie: expired timestamp
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 19:48:44 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 19:48:44 report.go:56: 
+ERROR 2022/08/09 19:48:44 report.go:54: 09.08.2022 19:48:44
+D:/futble/game/action.go:48
+sql: no rows in result set
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 19:48:44 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 19:48:44 report.go:56: 
+ERROR 2022/08/09 19:49:33 report.go:54: 09.08.2022 19:49:33
+D:/futble/game/auth.go:187
+securecookie: expired timestamp
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 19:49:33 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 19:49:33 report.go:56: 
+ERROR 2022/08/09 19:49:33 report.go:54: 09.08.2022 19:49:33
+D:/futble/game/action.go:48
+sql: no rows in result set
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 19:49:33 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 19:49:33 report.go:56: 
+ERROR 2022/08/09 19:58:08 report.go:54: 09.08.2022 19:58:08
+D:/futble/game/auth.go:187
+securecookie: expired timestamp
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 19:58:08 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 19:58:08 report.go:56: 
+ERROR 2022/08/09 19:58:08 report.go:54: 09.08.2022 19:58:08
+D:/futble/game/action.go:48
+sql: no rows in result set
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 19:58:08 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 19:58:08 report.go:56: 
+ERROR 2022/08/09 20:00:38 report.go:54: 09.08.2022 20:00:38
+D:/futble/game/auth.go:187
+securecookie: expired timestamp
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 20:00:38 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 20:00:38 report.go:56: 
+ERROR 2022/08/09 20:00:38 report.go:54: 09.08.2022 20:00:38
+D:/futble/game/action.go:48
+sql: no rows in result set
+
+GET /api/game HTTP/1.1
+Host: localhost:8080
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9
+Accept-Encoding: gzip, deflate, br
+Accept-Language: ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7,zh-CN;q=0.6,zh;q=0.5
+Cache-Control: max-age=0
+Connection: keep-alive
+Cookie: cookie-name=MTY1NDY0NTg0NnxIS0p4bkJrbHpVYjVnS3JNUUp2VU10YkQtWC03aEtSYkxsalFpNXFYQWl4dlNWX3UteDIyb0drUWZmTmNmYllYV2RkTzJHSnZja3ZUR3duendFNmlaR1hOQUt5SHFvaG52d0hmNDBEV3RPRFBpcklWeF9aNWlkZDVJQi0ybzhIeWZZNkhzc1hZdDYyYV9KX0hzejRYWHU3dEJHV0pyZmVzUUN0dWJmV01wUnkwYVlLR3hKZ0N6Z0s1cVZrNDB6UDhEbzNWZktldGl1Sk1XVy1zfN8GwTXxpx4v-UB9Ozh5ry_Eix8U0otcUQVWAnK3Nn4t
+Sec-Ch-Ua: "Chromium";v="104", " Not A;Brand";v="99", "Google Chrome";v="104"
+Sec-Ch-Ua-Mobile: ?0
+Sec-Ch-Ua-Platform: "Windows"
+Sec-Fetch-Dest: document
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Site: none
+Sec-Fetch-User: ?1
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+
+ERROR 2022/08/09 20:00:38 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/09 20:00:38 report.go:56: 
+ERROR 2022/08/12 18:47:55 report.go:54: 12.08.2022 18:47:55
+D:/futble/game/rating.go:880
+pq: got 1 parameters but the statement requires 0
+
+SELECT id, login FROM users.accounts WHERE login like ''a'%' AND not_logged = FALSE
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/08/12 18:47:55 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/12 18:47:55 report.go:56: 
+ERROR 2022/08/13 01:57:26 report.go:54: 13.08.2022 01:57:26
+D:/futble/game/rating.go:970
+sql: Scan error on column index 3, name "coinsdiff": converting NULL to int is unsupported
+
+ERROR 2022/08/13 01:57:26 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/13 01:57:26 report.go:56: 
+ERROR 2022/08/13 01:57:26 report.go:54: 13.08.2022 01:57:26
+D:/futble/game/rating.go:970
+sql: Scan error on column index 3, name "coinsdiff": converting NULL to int is unsupported
+
+ERROR 2022/08/13 01:57:26 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/13 01:57:26 report.go:56: 

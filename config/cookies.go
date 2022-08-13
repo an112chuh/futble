@@ -19,4 +19,5 @@ func InitCookies() {
 		MaxAge:   60 * 300000000,
 		HttpOnly: true,
 	}
+	Store.MaxAge(60 * 300000000)
 }

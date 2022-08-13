@@ -152,8 +152,8 @@ func Reg(r *http.Request, data AccountData, IDUser int) (res result.ResultInfo, 
 			report.ErrorSQLServer(r, err, query, params...)
 			return
 		}
-		query = `INSERT INTO users.trophies (id_user, trophies) VALUES ($1, 0)`
-		params = []any{IDUser}
+		query = `INSERT INTO users.trophies (id_user, trophies, updated_at) VALUES ($1, 0, $2)`
+		params = []any{IDUser, time.Now()}
 		_, err = db.Exec(query, params...)
 		if err != nil {
 			report.ErrorSQLServer(r, err, query, params...)
@@ -180,6 +180,8 @@ func getUser(s *sessions.Session) config.User {
 
 func IsLogin(w http.ResponseWriter, r *http.Request) (user config.User) {
 	session, err := config.Store.Get(r, "cookie-name")
+	//	fmt.Printf("%+v\n", session)
+	//	fmt.Printf("%+v\n", session.Options)
 	if err != nil {
 		report.ErrorServer(r, err)
 		return

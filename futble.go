@@ -7,6 +7,7 @@ import (
 	"futble/config"
 	"futble/constants"
 	"futble/daemon"
+	"futble/game"
 	"futble/routes"
 	"net/http"
 	"os"
@@ -39,8 +40,12 @@ func main() {
 	check.CheckLeagueCorrect()
 	check.DownloadIDs()
 	// game.AddDailyGames()
+	//	go daemon.TestCountRateDiff()
 	go daemon.SearchList.SearchingOpponent(daemon.SearchingActive)
-	//	go daemon.ClearDatabase()
+	go daemon.RatingGameFinishing()
+	go daemon.ClearDatabase()
+	go daemon.InviteSearch()
+	go game.FinishingGames()
 	gob.Register(config.User{})
 	routeAll := mux.NewRouter()
 	routes.GetAllHandlers(routeAll)

@@ -130,11 +130,11 @@ func CreateNewAnswer(IDGame int, AnsInGame int) int {
 	return IDAnswer
 }
 
-func GameInfoCollect(ID int) (Game, error) {
+func GameInfoCollect(ID int, hints ...any) (Game, error) {
 	var res Game
 	var GuessIDs []int
 	db := config.ConnectDB()
-	query := `SELECT id_guess FROM games.guess WHERE id_game = $1`
+	query := `SELECT id_guess FROM games.guess WHERE id_game = $1 ORDER BY id ASC`
 	params := []any{ID}
 	rows, err := db.Query(query, params...)
 	if err != nil {

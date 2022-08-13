@@ -13,6 +13,7 @@ type Game struct {
 	GameMode   int          `json:"game_mode"`
 	Started    *bool        `json:"started,omitempty"`
 	TimeStart  *string      `json:"start_time,omitempty"`
+	TimeFinish *string      `json:"finish_time,omitempty"`
 	GameResult *string      `json:"game_result,omitempty"`
 	Answers    []AnswerType `json:"answers"`
 }

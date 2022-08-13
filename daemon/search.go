@@ -1,7 +1,6 @@
 package daemon
 
 import (
-	"fmt"
 	"futble/report"
 	"os"
 	"sort"
@@ -54,9 +53,6 @@ func (SearchList *SafeGameFinder) SearchingOpponent(SearchingActive bool) {
 			return SearchList.Items[i].Rating > SearchList.Items[j].Rating
 		})
 		for i := 0; i < len(SearchList.Items); i++ {
-			if i == 1 {
-				fmt.Println(len(SearchList.Items))
-			}
 			var RateDiff int
 			if time.Since(SearchList.Items[i].TimeStart) < 10*time.Second {
 				RateDiff = RATE_DIFF_BEFORE_10
