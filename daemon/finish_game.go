@@ -1,7 +1,6 @@
 package daemon
 
 import (
-	"fmt"
 	"futble/config"
 	"futble/report"
 	"sync"
@@ -48,7 +47,7 @@ func RatingGameFinishing() {
 	for {
 		GamesList.Mutex.Lock()
 		for i := 0; i < len(GamesList.Games); i++ {
-			fmt.Println(len(GamesList.Games))
+			//			fmt.Println(len(GamesList.Games))
 			if GamesList.Games[i].TimeStart.Add(10 * time.Minute).Before(time.Now()) {
 				FinishedList.Mutex.Lock()
 				FinishedList.Games = append(FinishedList.Games, GamesList.Games[i].ID)

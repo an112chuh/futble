@@ -20,6 +20,7 @@ const (
 type User struct {
 	Username      string
 	ID            int `json:"id"`
+	Mail          string
 	Rights        Rights
 	Authenticated bool
 }

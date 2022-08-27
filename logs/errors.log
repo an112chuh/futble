@@ -931,3 +931,260 @@ sql: Scan error on column index 3, name "coinsdiff": converting NULL to int is u
 
 ERROR 2022/08/13 01:57:26 report.go:55: ——————————————————————————————————————————————————————————————————————
 ERROR 2022/08/13 01:57:26 report.go:56: 
+ERROR 2022/08/20 11:56:06 report.go:54: 20.08.2022 11:56:06
+D:/futble/game/rating.go:1536
+must be 2 players in game
+
+ERROR 2022/08/20 11:56:06 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/20 11:56:06 report.go:56: 
+ERROR 2022/08/25 16:23:32 report.go:54: 25.08.2022 16:23:32
+D:/futble/game/messages.go:69
+invalid character '"' after object key:value pair
+
+GET /api/messages/create HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 250
+Content-Type: text/plain
+Cookie: cookie-name=MTY2MDM2NTMxNHwzb2pmRXdCampBRjFYeU1TWEcxdjhmTkFGLVdTMVhsYXhnZUI2NFJHX2h0dkZnbVNFeHphTzNUUXFpQUVfa3NZOVBXR1dIeUVWempZZXpJdzFET0JGR0JtN3VjRW80OFN1NkRkejc1NUk0dFVZa2dhVktJU1dOcnh3QlNwVzRwSmpOY0MtWVBUMHBLeWxJaUhjN25RWEl2TzBSeTZEU0NUSEtMN0dtY3RPREVadkJ1bGZGTTRQRndEM3RCMURxVnM2c1BrQUstTWs4aThBdFVZfCPdYA-C2ixTK2X3zxQfRdp5POyldUMDwYj2ulO7pjyD
+Postman-Token: ec24643a-4fda-46dd-a09e-926a20238446
+User-Agent: PostmanRuntime/7.29.2
+
+ERROR 2022/08/25 16:23:32 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 16:23:32 report.go:56: 
+ERROR 2022/08/25 16:23:50 report.go:54: 25.08.2022 16:23:50
+D:/futble/game/messages.go:182
+open messages/1/1.txt: The system cannot find the path specified.
+
+ERROR 2022/08/25 16:23:50 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 16:23:50 report.go:56: 
+ERROR 2022/08/25 16:25:06 report.go:54: 25.08.2022 16:25:06
+D:/futble/game/messages.go:182
+open store/messages/2/2.txt: The system cannot find the path specified.
+
+ERROR 2022/08/25 16:25:06 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 16:25:06 report.go:56: 
+ERROR 2022/08/25 16:28:58 report.go:54: 25.08.2022 16:28:58
+D:/futble/game/messages.go:182
+open ./store/messages/3/3.txt: The system cannot find the path specified.
+
+ERROR 2022/08/25 16:28:58 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 16:28:58 report.go:56: 
+ERROR 2022/08/25 16:31:27 report.go:54: 25.08.2022 16:31:27
+D:/futble/game/messages.go:182
+open messages/4/4.txt: The system cannot find the path specified.
+
+ERROR 2022/08/25 16:31:27 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 16:31:27 report.go:56: 
+ERROR 2022/08/25 17:39:51 report.go:54: 25.08.2022 17:39:51
+D:/futble/game/messages.go:276
+pq: отношение "messages.request" не существует
+
+SELECT EXISTS(SELECT 1 FROM messages.request WHERE id = 4 AND answered = TRUE AND closed = FALSE)
+
+&pq.Error{Severity:"ОШИБКА", Code:"42P01", Message:"отношение \"messages.request\" не существует", Detail:"", Hint:"", Position:"29", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"1363", Routine:"parserOpenTable"}
+
+ERROR 2022/08/25 17:39:51 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 17:39:51 report.go:56: 
+ERROR 2022/08/25 17:42:41 report.go:54: 25.08.2022 17:42:41
+D:/futble/game/messages.go:233
+pq: отношение "messages.request" не существует
+
+SELECT EXISTS(SELECT 1 FROM messages.request WHERE id = 4 AND id_user = 110)
+
+&pq.Error{Severity:"ОШИБКА", Code:"42P01", Message:"отношение \"messages.request\" не существует", Detail:"", Hint:"", Position:"29", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"parse_relation.c", Line:"1363", Routine:"parserOpenTable"}
+
+ERROR 2022/08/25 17:42:41 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 17:42:41 report.go:56: 
+ERROR 2022/08/25 17:43:22 report.go:54: 25.08.2022 17:43:22
+D:/futble/game/messages.go:280
+open messages/4/4: The system cannot find the path specified.
+
+ERROR 2022/08/25 17:43:22 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 17:43:22 report.go:56: 
+ERROR 2022/08/25 17:44:47 report.go:54: 25.08.2022 17:44:47
+D:/futble/game/messages.go:280
+open messages/4/4.txt: The system cannot find the path specified.
+
+ERROR 2022/08/25 17:44:47 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 17:44:47 report.go:56: 
+ERROR 2022/08/25 23:01:16 report.go:54: 25.08.2022 23:01:16
+D:/futble/game/messages.go:564
+sql: Scan error on column index 1, name "mail2": converting NULL to string is unsupported
+
+SELECT messages.requests.mail AS mail1, users.accounts.mail AS mail2, is_logged FROM users.accounts 
+		INNER JOIN messages.requests ON id_user = users.accounts.id
+		WHERE messages.requests.id = 5
+
+&pq.Error{Severity:"", Code:"", Message:"", Detail:"", Hint:"", Position:"", InternalPosition:"", InternalQuery:"", Where:"", Schema:"", Table:"", Column:"", DataTypeName:"", Constraint:"", File:"", Line:"", Routine:""}
+
+ERROR 2022/08/25 23:01:16 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:01:16 report.go:56: 
+ERROR 2022/08/25 23:03:01 report.go:54: 25.08.2022 23:03:01
+D:/futble/game/messages.go:619
+535 5.7.8 Username and Password not accepted. Learn more at
+5.7.8  https://support.google.com/mail/?p=BadCredentials z9-20020ac24f89000000b00492dc29be7bsm5940lfs.227 - gsmtp
+
+ERROR 2022/08/25 23:03:01 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:03:01 report.go:56: 
+ERROR 2022/08/25 23:06:44 report.go:54: 25.08.2022 23:06:44
+D:/futble/game/messages.go:619
+535 5.7.8 Username and Password not accepted. Learn more at
+5.7.8  https://support.google.com/mail/?p=BadCredentials z25-20020a19f719000000b0048b969ac5cdsm24725lfe.5 - gsmtp
+
+ERROR 2022/08/25 23:06:44 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:06:44 report.go:56: 
+ERROR 2022/08/25 23:07:59 report.go:54: 25.08.2022 23:07:59
+D:/futble/game/messages.go:619
+535 5.7.8 Username and Password not accepted. Learn more at
+5.7.8  https://support.google.com/mail/?p=BadCredentials q3-20020a05651232a300b00492f049258asm20088lfe.65 - gsmtp
+
+ERROR 2022/08/25 23:07:59 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:07:59 report.go:56: 
+ERROR 2022/08/25 23:11:18 report.go:54: 25.08.2022 23:11:18
+D:/futble/game/messages.go:619
+535 5.7.8 Username and Password not accepted. Learn more at
+5.7.8  https://support.google.com/mail/?p=BadCredentials u12-20020a2eb80c000000b0025d64453f4dsm56610ljo.122 - gsmtp
+
+ERROR 2022/08/25 23:11:18 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:11:18 report.go:56: 
+ERROR 2022/08/25 23:14:34 report.go:54: 25.08.2022 23:14:34
+D:/futble/game/messages.go:619
+535 5.7.8 Error: authentication failed: Invalid user or password! 1661458475-NGq3hbHoq8-EYhq1gLT
+
+ERROR 2022/08/25 23:14:34 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:14:34 report.go:56: 
+ERROR 2022/08/25 23:15:58 report.go:54: 25.08.2022 23:15:58
+D:/futble/game/messages.go:619
+535 5.7.8 Error: authentication failed: Invalid user or password! 1661458560-qbFz0P2J5Y-FxiGCI0q
+
+ERROR 2022/08/25 23:15:58 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:15:58 report.go:56: 
+ERROR 2022/08/25 23:18:12 report.go:54: 25.08.2022 23:18:12
+D:/futble/game/messages.go:619
+535 5.7.8 Error: authentication failed: Invalid user or password! 1661458693-4QxuOrXr3j-ICiuvaYL
+
+ERROR 2022/08/25 23:18:12 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/25 23:18:12 report.go:56: 
+ERROR 2022/08/26 03:17:31 report.go:54: 26.08.2022 03:17:31
+D:/futble/game/messages.go:619
+gomail: could not send email 1: gomail: invalid address "": mail: no address
+
+ERROR 2022/08/26 03:17:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/26 03:17:31 report.go:56: 
+ERROR 2022/08/26 03:20:45 report.go:54: 26.08.2022 03:20:45
+D:/futble/game/messages.go:619
+gomail: could not send email 1: gomail: invalid address "": mail: no address
+
+ERROR 2022/08/26 03:20:45 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/26 03:20:45 report.go:56: 
+ERROR 2022/08/26 03:21:39 report.go:54: 26.08.2022 03:21:39
+D:/futble/game/messages.go:620
+gomail: could not send email 1: gomail: invalid address "": mail: no address
+
+ERROR 2022/08/26 03:21:39 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/26 03:21:39 report.go:56: 
+ERROR 2022/08/27 19:20:19 report.go:54: 27.08.2022 19:20:19
+D:/futble/game/rating.go:1681
+must be 2 players in game
+
+ERROR 2022/08/27 19:20:19 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:20:19 report.go:56: 
+ERROR 2022/08/27 19:29:03 report.go:54: 27.08.2022 19:29:03
+D:/futble/game/game.go:175
+error in getting hints
+
+ERROR 2022/08/27 19:29:03 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:29:03 report.go:56: 
+ERROR 2022/08/27 19:29:03 report.go:54: 27.08.2022 19:29:03
+D:/futble/game/game.go:182
+error in getting hint type
+
+ERROR 2022/08/27 19:29:03 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:29:03 report.go:56: 
+ERROR 2022/08/27 19:31:17 report.go:54: 27.08.2022 19:31:17
+D:/futble/game/game.go:175
+error in getting hints
+
+ERROR 2022/08/27 19:31:17 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:31:17 report.go:56: 
+ERROR 2022/08/27 19:31:17 report.go:54: 27.08.2022 19:31:17
+D:/futble/game/game.go:182
+error in getting hint type
+
+ERROR 2022/08/27 19:31:17 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:31:17 report.go:56: 
+ERROR 2022/08/27 19:32:31 report.go:54: 27.08.2022 19:32:31
+D:/futble/game/game.go:177
+error in getting hints
+
+ERROR 2022/08/27 19:32:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:32:31 report.go:56: 
+ERROR 2022/08/27 19:32:31 report.go:54: 27.08.2022 19:32:31
+D:/futble/game/game.go:184
+error in getting hint type
+
+ERROR 2022/08/27 19:32:31 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:32:31 report.go:56: 
+ERROR 2022/08/27 19:35:25 report.go:54: 27.08.2022 19:35:25
+D:/futble/game/rating.go:1681
+must be 2 players in game
+
+ERROR 2022/08/27 19:35:25 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:35:25 report.go:56: 
+ERROR 2022/08/27 19:35:52 report.go:54: 27.08.2022 19:35:52
+D:/futble/game/game.go:177
+error in getting hints
+
+ERROR 2022/08/27 19:35:52 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:35:52 report.go:56: 
+ERROR 2022/08/27 19:35:52 report.go:54: 27.08.2022 19:35:52
+D:/futble/game/game.go:184
+error in getting hint type
+
+ERROR 2022/08/27 19:35:52 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:35:52 report.go:56: 
+ERROR 2022/08/27 19:36:44 report.go:54: 27.08.2022 19:36:44
+D:/futble/game/rating.go:1681
+must be 2 players in game
+
+ERROR 2022/08/27 19:36:44 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:36:44 report.go:56: 
+ERROR 2022/08/27 19:36:55 report.go:54: 27.08.2022 19:36:55
+D:/futble/game/game.go:177
+error in getting hints
+
+ERROR 2022/08/27 19:36:55 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:36:55 report.go:56: 
+ERROR 2022/08/27 19:41:20 report.go:54: 27.08.2022 19:41:20
+D:/futble/game/rating.go:1699
+must be 2 players in game
+
+ERROR 2022/08/27 19:41:20 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:41:20 report.go:56: 
+ERROR 2022/08/27 19:58:29 report.go:54: 27.08.2022 19:58:29
+D:/futble/game/auth.go:77
+invalid character '"' after object key:value pair
+
+GET /api/login HTTP/1.1
+Host: localhost:8080
+Accept: */*
+Accept-Encoding: gzip, deflate, br
+Cache-Control: no-cache
+Connection: keep-alive
+Content-Length: 48
+Content-Type: text/plain
+Postman-Token: 444ec314-a41a-447c-873d-0c9fa37a2ea0
+User-Agent: PostmanRuntime/7.29.2
+
+ERROR 2022/08/27 19:58:29 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:58:29 report.go:56: 
+ERROR 2022/08/27 19:59:35 report.go:54: 27.08.2022 19:59:35
+D:/futble/game/rating.go:1699
+must be 2 players in game
+
+ERROR 2022/08/27 19:59:35 report.go:55: ——————————————————————————————————————————————————————————————————————
+ERROR 2022/08/27 19:59:35 report.go:56: 

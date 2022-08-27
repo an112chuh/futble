@@ -12,8 +12,11 @@ require (
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 )
 
+require gopkg.in/alexcesaro/quotedprintable.v3 v3.0.0-20150716171945-2caba252f4dc // indirect
+
 require (
 	github.com/BurntSushi/toml v1.1.0 // indirect
 	github.com/gorilla/securecookie v1.1.1 // indirect
+	gopkg.in/mail.v2 v2.3.1
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

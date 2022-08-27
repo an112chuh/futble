@@ -46,20 +46,25 @@ func InviteSearch() {
 	}
 	Invites.Mutex.Unlock()
 	for {
-		fmt.Printf("Item - %+v\n", Invites.Items)
-		Invites.Mutex.Lock()
-		for key, value := range Invites.Items {
-			for i := 0; i < len(value); i++ {
-				if value[i].ExpiryTime.Before(time.Now()) {
-					go DiscardSearch(value[i].User1)
-					value = RemoveElements(value, i)
-					i--
-					Invites.Items[key] = value
+		if !IsMaintenaunce {
+			//			fmt.Printf("Item - %+v\n", Invites.Items)
+			Invites.Mutex.Lock()
+			for key, value := range Invites.Items {
+				for i := 0; i < len(value); i++ {
+					if value[i].ExpiryTime.Before(time.Now()) {
+						go DiscardSearch(value[i].User1)
+						value = RemoveElements(value, i)
+						i--
+						Invites.Items[key] = value
+					}
 				}
 			}
+			Invites.Mutex.Unlock()
+			time.Sleep(10 * time.Second)
+		} else {
+			fmt.Println(`Inviting opponents stopped`)
+			break
 		}
-		Invites.Mutex.Unlock()
-		time.Sleep(10 * time.Second)
 	}
 }
 

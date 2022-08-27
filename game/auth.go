@@ -16,9 +16,11 @@ import (
 )
 
 type AccountData struct {
-	Login    string `json:"login"`
-	Password string `json:"password"`
-	IsLogged bool
+	Login     string  `json:"login"`
+	Password  string  `json:"password"`
+	Mail      *string `json:"mail,omitempty"`
+	Promocode *string `json:"promocode,omitempty"`
+	IsLogged  bool
 }
 
 func TestHandler(w http.ResponseWriter, r *http.Request) {
@@ -92,6 +94,30 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	result.ReturnJSON(w, &res)
 }
 
+func LogoutHandler(w http.ResponseWriter, r *http.Request) {
+	session, err := config.Store.Get(r, "cookie-name")
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+	user := getUser(session)
+	if user.Rights != config.NotLogged {
+		session.Values["user"] = config.User{}
+		session.Options.MaxAge = -1
+		err = session.Save(r, w)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+		var res result.ResultInfo
+		res.Done = true
+		result.ReturnJSON(w, &res)
+	} else {
+		result.SetErrorResult("Can't logout unlogged user")
+		return
+	}
+}
+
 func Reg(r *http.Request, data AccountData, IDUser int) (res result.ResultInfo, user config.User) {
 	db := config.ConnectDB()
 	if data.Login == `newman` {
@@ -145,8 +171,8 @@ func Reg(r *http.Request, data AccountData, IDUser int) (res result.ResultInfo, 
 			res = result.SetErrorResult(`You are already in account`)
 			return
 		}
-		query = `UPDATE users.accounts SET login = $1, not_logged = false, password = $2, rights = $3 WHERE id = $4`
-		params = []any{data.Login, Hash, user.Rights, IDUser}
+		query = `UPDATE users.accounts SET login = $1, not_logged = false, password = $2, rights = $3, mail = $4, promocode = $5 WHERE id = $6`
+		params = []any{data.Login, Hash, user.Rights, data.Mail, data.Promocode, IDUser}
 		_, err = db.Exec(query, params...)
 		if err != nil {
 			report.ErrorSQLServer(r, err, query, params...)

@@ -1,6 +1,7 @@
 package daemon
 
 import (
+	"fmt"
 	"futble/report"
 	"os"
 	"sort"
@@ -38,9 +39,10 @@ var RATE_DIFF_BEFORE_30 int = 300
 var SearchList SafeGameFinder
 var ResultList SafeGameResult
 
-var SearchingActive bool = true
+var IsMaintenaunce bool = false
+var MaintenaunceReason string = ``
 
-func (SearchList *SafeGameFinder) SearchingOpponent(SearchingActive bool) {
+func (SearchList *SafeGameFinder) SearchingOpponent() {
 	file, err := os.Create("logs/balancer.txt")
 	if err != nil {
 		report.ErrorServer(nil, err)
@@ -48,38 +50,43 @@ func (SearchList *SafeGameFinder) SearchingOpponent(SearchingActive bool) {
 	}
 	defer file.Close()
 	for {
-		SearchList.Mutex.Lock()
-		sort.SliceStable(SearchList.Items, func(i int, j int) bool {
-			return SearchList.Items[i].Rating > SearchList.Items[j].Rating
-		})
-		for i := 0; i < len(SearchList.Items); i++ {
-			var RateDiff int
-			if time.Since(SearchList.Items[i].TimeStart) < 10*time.Second {
-				RateDiff = RATE_DIFF_BEFORE_10
-			} else if time.Since(SearchList.Items[i].TimeStart) < 20*time.Second {
-				RateDiff = RATE_DIFF_BEFORE_20
-			} else if time.Since(SearchList.Items[i].TimeStart) < 30*time.Second {
-				RateDiff = RATE_DIFF_BEFORE_30
-			} else {
-				RateDiff = 999999
-			}
-			for j := i + 1; j < len(SearchList.Items); j++ {
-				if abs(SearchList.Items[i].Rating-SearchList.Items[j].Rating) < RateDiff {
-					ResultList.Mutex.Lock()
-					var g GameResult
-					g.Home = SearchList.Items[i].ID
-					g.Away = SearchList.Items[j].ID
-					g.IsDeletedHome = false
-					g.IsDeletedAway = false
-					ResultList.Items = append(ResultList.Items, g)
-					ResultList.Mutex.Unlock()
-					SearchList.RemoveElements(i, j)
-					i--
-					break
+		if !IsMaintenaunce {
+			SearchList.Mutex.Lock()
+			sort.SliceStable(SearchList.Items, func(i int, j int) bool {
+				return SearchList.Items[i].Rating > SearchList.Items[j].Rating
+			})
+			for i := 0; i < len(SearchList.Items); i++ {
+				var RateDiff int
+				if time.Since(SearchList.Items[i].TimeStart) < 10*time.Second {
+					RateDiff = RATE_DIFF_BEFORE_10
+				} else if time.Since(SearchList.Items[i].TimeStart) < 20*time.Second {
+					RateDiff = RATE_DIFF_BEFORE_20
+				} else if time.Since(SearchList.Items[i].TimeStart) < 30*time.Second {
+					RateDiff = RATE_DIFF_BEFORE_30
+				} else {
+					RateDiff = 999999
+				}
+				for j := i + 1; j < len(SearchList.Items); j++ {
+					if abs(SearchList.Items[i].Rating-SearchList.Items[j].Rating) < RateDiff {
+						ResultList.Mutex.Lock()
+						var g GameResult
+						g.Home = SearchList.Items[i].ID
+						g.Away = SearchList.Items[j].ID
+						g.IsDeletedHome = false
+						g.IsDeletedAway = false
+						ResultList.Items = append(ResultList.Items, g)
+						ResultList.Mutex.Unlock()
+						SearchList.RemoveElements(i, j)
+						i--
+						break
+					}
 				}
 			}
+			SearchList.Mutex.Unlock()
+		} else {
+			fmt.Println(`Searching opponents stopped`)
+			break
 		}
-		SearchList.Mutex.Unlock()
 	}
 }
 

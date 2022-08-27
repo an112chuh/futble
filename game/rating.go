@@ -87,11 +87,26 @@ type RatingHintPricesStruct struct {
 	Price    int  `json:"price"`
 }
 
+type Hint struct {
+	Color int
+	Type  int
+}
+
+type HintOpponent struct {
+	Exist bool `json:"exist"`
+	Color *int `json:"color,omitempty"`
+}
+
 func SearchRatingGameHandler(w http.ResponseWriter, r *http.Request) {
 	var res result.ResultInfo
 	user := IsLogin(w, r)
 	if user.Rights == config.NotLogged {
 		res = result.SetErrorResult(NOT_LOGGED_ERROR)
+		result.ReturnJSON(w, &res)
+		return
+	}
+	if daemon.IsMaintenaunce {
+		res = result.SetErrorResult(MAINTENAUNCE_ERROR + daemon.MaintenaunceReason)
 		result.ReturnJSON(w, &res)
 		return
 	}
@@ -104,6 +119,11 @@ func RatingSendInviteHandler(w http.ResponseWriter, r *http.Request) {
 	user := IsLogin(w, r)
 	if user.Rights == config.NotLogged {
 		res = result.SetErrorResult(NOT_LOGGED_ERROR)
+		result.ReturnJSON(w, &res)
+		return
+	}
+	if daemon.IsMaintenaunce {
+		res = result.SetErrorResult(MAINTENAUNCE_ERROR + daemon.MaintenaunceReason)
 		result.ReturnJSON(w, &res)
 		return
 	}
@@ -427,7 +447,17 @@ func RatingGame(user config.User) (res result.ResultInfo) {
 			return
 		}
 	}
-	GameInfo, err := GameInfoCollect(IDGame)
+	Hints, err := GetCurrentGameHints(IDGame)
+	if err != nil {
+		res = result.SetErrorResult(`Error in getting hints`)
+		return
+	}
+	var GameInfo Game
+	if len(Hints) > 0 {
+		GameInfo, err = GameInfoCollect(IDGame, Hints)
+	} else {
+		GameInfo, err = GameInfoCollect(IDGame)
+	}
 	if err != nil {
 		res = result.SetErrorResult(`Error in collecting game data`)
 		return
@@ -472,7 +502,17 @@ func RatingGameAnswer(user config.User, IDGuess int) (res result.ResultInfo) {
 	if GameResult == -10 {
 		return
 	}
-	GameInfo, err := GameInfoCollect(IDGame)
+	Hints, err := GetCurrentGameHints(IDGame)
+	if err != nil {
+		res = result.SetErrorResult(`Error in getting hints`)
+		return
+	}
+	var GameInfo Game
+	if len(Hints) > 0 {
+		GameInfo, err = GameInfoCollect(IDGame, Hints)
+	} else {
+		GameInfo, err = GameInfoCollect(IDGame)
+	}
 	if err != nil {
 		res = result.SetErrorResult(`Ошибка при получении данных об игре`)
 		return
@@ -485,7 +525,16 @@ func RatingGameAnswer(user config.User, IDGuess int) (res result.ResultInfo) {
 			res = result.SetErrorResult(`Error in creating new game`)
 			return
 		}
-		GameInfo, err = GameInfoCollect(IDGame)
+		Hints, err := GetCurrentGameHints(IDGame)
+		if err != nil {
+			res = result.SetErrorResult(`Error in getting hints`)
+			return
+		}
+		if len(Hints) > 0 {
+			GameInfo, err = GameInfoCollect(IDGame, Hints)
+		} else {
+			GameInfo, err = GameInfoCollect(IDGame)
+		}
 		if err != nil {
 			res = result.SetErrorResult(`Error in collecting game data`)
 			return
@@ -500,7 +549,16 @@ func RatingGameAnswer(user config.User, IDGuess int) (res result.ResultInfo) {
 				res = result.SetErrorResult(`Error in creating new game`)
 				return
 			}
-			GameInfo, err = GameInfoCollect(IDGame)
+			Hints, err := GetCurrentGameHints(IDGame)
+			if err != nil {
+				res = result.SetErrorResult(`Error in getting hints`)
+				return
+			}
+			if len(Hints) > 0 {
+				GameInfo, err = GameInfoCollect(IDGame, Hints)
+			} else {
+				GameInfo, err = GameInfoCollect(IDGame)
+			}
 			if err != nil {
 				res = result.SetErrorResult(`Error in collecting game data`)
 				return
@@ -795,6 +853,18 @@ func RatingHintHandler(w http.ResponseWriter, r *http.Request) {
 	result.ReturnJSON(w, &res)
 }
 
+func RatingHintOpponentHandler(w http.ResponseWriter, r *http.Request) {
+	var res result.ResultInfo
+	user := IsLogin(w, r)
+	if user.Rights == config.NotLogged {
+		res = result.SetErrorResult(NOT_LOGGED_ERROR)
+		result.ReturnJSON(w, &res)
+		return
+	}
+	res = GetHintOpponent(user)
+	result.ReturnJSON(w, &res)
+}
+
 func RatingScore(IDGame int, IDUser int) (res result.ResultInfo) {
 	db := config.ConnectDB()
 	type UserScore struct {
@@ -950,6 +1020,30 @@ func GetRatingStandings(IDUser int, IsLogged bool, IDPage int) (res result.Resul
 	res.Done = true
 	res.Items = Rating
 	*res.Paginator = p
+	return
+}
+
+func GetCurrentGameHints(IDGame int) (hints []Hint, err error) {
+	db := config.ConnectDB()
+	query := `SELECT color, type FROM hints.prices
+		INNER JOIN hints.game ON hints.game.id_hint = hints.prices.id
+		WHERE hints.game.id_local_game = $1`
+	params := []any{IDGame}
+	rows, err := db.Query(query, params...)
+	if err != nil {
+		report.ErrorSQLServer(nil, err, query, params...)
+		return
+	}
+	defer rows.Close()
+	for rows.Next() {
+		var h Hint
+		err = rows.Scan(&h.Color, &h.Type)
+		if err != nil {
+			report.ErrorServer(nil, err)
+			return
+		}
+		hints = append(hints, h)
+	}
 	return
 }
 
@@ -1161,6 +1255,30 @@ func PutHint(user config.User, IDColor int, IDType int) (res result.ResultInfo) 
 		res = result.SetErrorResult(`No hints with this params`)
 		return
 	}
+	var LastColor int
+	query = `SELECT color FROM hints.prices
+		INNER JOIN hints.game ON id_hint = hints.prices.id
+		WHERE type = $1 and id_local_game = $2 ORDER BY hints.game.id DESC LIMIT 1`
+	params = []any{IDType, IDLocalGame}
+	err = db.QueryRow(query, params...).Scan(&LastColor)
+	if err != nil && err != sql.ErrNoRows {
+		report.ErrorSQLServer(nil, err, query, params...)
+		res = result.SetErrorResult(DATABASE_ERROR)
+		return
+	}
+	switch LastColor {
+	case GREY:
+	case YELLOW:
+		if IDColor == YELLOW || IDColor == RED {
+			res = result.SetErrorResult(`Can't use this hint(yellow)`)
+		}
+	case GREEN:
+		res = result.SetErrorResult(`Can't use this hint(green)`)
+	case RED:
+		if IDColor == RED {
+			res = result.SetErrorResult(`Can't use this hint(red)`)
+		}
+	}
 	Coins := GetUserCoins(user.ID)
 	if Coins < PriceHint {
 		res = result.SetErrorResult(`You don't have enough coins for this hint`)
@@ -1183,6 +1301,51 @@ func PutHint(user config.User, IDColor int, IDType int) (res result.ResultInfo) 
 		return
 	}
 	res.Done = true
+	return
+}
+
+func GetHintOpponent(user config.User) (res result.ResultInfo) {
+	db := config.ConnectDB()
+	var h HintOpponent
+	IDGlobalGame := CheckRatingGameExist(user)
+	if IDGlobalGame == -1 {
+		res = result.SetErrorResult(`Error in searching current game`)
+		return
+	}
+	if IDGlobalGame == 0 {
+		res = result.SetErrorResult(`Please, create new game`)
+		return
+	}
+	var IDColor, IDHint int
+	query := `SELECT color, hints.game.id FROM hints.prices 
+		INNER JOIN hints.game ON id_hint = hints.prices.id
+		WHERE id_global_game = $1 AND shared = FALSE ORDER BY hints.game.id ASC LIMIT 1`
+	params := []any{IDGlobalGame}
+	err := db.QueryRow(query, params...).Scan(&IDColor, &IDHint)
+	if err != nil && err != sql.ErrNoRows {
+		report.ErrorSQLServer(nil, err, query, params...)
+		res = result.SetErrorResult(DATABASE_ERROR)
+		return
+	}
+	if err == sql.ErrNoRows {
+		h.Exist = false
+		res.Done = true
+		res.Items = h
+		return
+	}
+	query = `UPDATE hints.game SET shared = TRUE WHERE id = $1`
+	params = []any{IDHint}
+	_, err = db.Exec(query, params...)
+	if err != nil {
+		report.ErrorSQLServer(nil, err, query, params...)
+		res = result.SetErrorResult(DATABASE_ERROR)
+		return
+	}
+	h.Color = new(int)
+	h.Color = &IDColor
+	h.Exist = true
+	res.Done = true
+	res.Items = h
 	return
 }
 
