@@ -6,24 +6,8 @@ import (
 	"gopkg.in/natefinch/lumberjack.v2"
 )
 
-type Rights int
-
 var ErrorLog *log.Logger
 var AccessLog *log.Logger
-
-const (
-	NotLogged Rights = 0
-	Default   Rights = 1
-	Admin     Rights = 2
-)
-
-type User struct {
-	Username      string
-	ID            int `json:"id"`
-	Mail          string
-	Rights        Rights
-	Authenticated bool
-}
 
 func InitLoggers() {
 	ErrorFile := &lumberjack.Logger{

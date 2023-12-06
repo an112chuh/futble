@@ -1,17 +1,19 @@
 package routes
 
 import (
+	apiplayer "futble/api/player"
+	user "futble/api/user"
 	"futble/game"
 
 	"github.com/gorilla/mux"
 )
 
 func GetAllHandlers(r *mux.Router) {
-	r.HandleFunc("/api/register", game.RegHandler)
-	r.HandleFunc("/api/login", game.LoginHandler)
-	r.HandleFunc("/api/logout", game.LogoutHandler)
-	r.HandleFunc("/api/test", game.TestHandler)
-	r.HandleFunc("/api/all_names", game.PlayerListHandler)
+	r.HandleFunc("/api/register", user.RegHandler)
+	r.HandleFunc("/api/login", user.LoginHandler)
+	r.HandleFunc("/api/logout", user.LogoutHandler)
+	r.HandleFunc("/api/test", user.TestHandler)
+	r.HandleFunc("/api/all_names", apiplayer.PlayerListHandler)
 	GetGameHandler(r)
 	GetRatingHandler(r)
 	GetMessagesHandler(r)

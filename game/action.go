@@ -8,38 +8,6 @@ import (
 	"strconv"
 )
 
-type Game struct {
-	ID         int          `json:"id"`
-	GameMode   int          `json:"game_mode"`
-	Started    *bool        `json:"started,omitempty"`
-	TimeStart  *string      `json:"start_time,omitempty"`
-	TimeFinish *string      `json:"finish_time,omitempty"`
-	GameResult *string      `json:"game_result,omitempty"`
-	Answers    []AnswerType `json:"answers"`
-}
-
-var WIN int = 1
-var LOSE int = -1
-var NOTHING int = 0
-
-type AnswerType struct {
-	ID            int    `json:"id"`
-	Name          string `json:"name"`
-	Surname       string `json:"surname"`
-	Age           int    `json:"age"`
-	AgeColor      int    `json:"age_color"`
-	Club          string `json:"club"`
-	ClubColor     int    `json:"club_color"`
-	League        string `json:"league"`
-	LeagueColor   int    `json:"league_color"`
-	Nation        string `json:"nation"`
-	NationColor   int    `json:"nation_color"`
-	Position      string `json:"position"`
-	PositionColor int    `json:"position_color"`
-	Price         int    `json:"price"`
-	PriceColor    int    `json:"price_color"`
-}
-
 func GameHandler(w http.ResponseWriter, r *http.Request) {
 	var res result.ResultInfo
 	user := IsLogin(w, r)

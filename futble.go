@@ -7,6 +7,7 @@ import (
 	"futble/config"
 	"futble/constants"
 	"futble/daemon"
+	"futble/entity"
 	"futble/game"
 	"futble/routes"
 	"net/http"
@@ -47,7 +48,7 @@ func main() {
 	go daemon.InviteSearch()
 	go daemon.CommandLine()
 	go game.FinishingGames()
-	gob.Register(config.User{})
+	gob.Register(entity.User{})
 	routeAll := mux.NewRouter()
 	routes.GetAllHandlers(routeAll)
 	routeAll.Use(mw)

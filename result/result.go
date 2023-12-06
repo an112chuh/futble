@@ -1,13 +1,10 @@
 package result
 
-import "futble/config"
-
 type ResultInfo struct {
 	Done      bool        `json:"done"`
 	Message   *string     `json:"message,omitempty"`
 	Items     interface{} `json:"data,omitempty"`
 	Paginator *Paginator  `json:"paginator,omitempty"`
-	User      config.User `json:"-"`
 }
 
 type Paginator struct {

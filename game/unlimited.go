@@ -9,11 +9,6 @@ import (
 	"time"
 )
 
-type AvgTime struct {
-	LastAnswer string `json:"last_answer"`
-	AvgTime    string `json:"avg_time"`
-}
-
 func UnlimitedGame(user config.User) (res result.ResultInfo) {
 	IDGame := CheckUnlimitedGameExist(user)
 	if IDGame == -1 {
