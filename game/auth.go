@@ -242,7 +242,7 @@ func SetOnline(user config.User) {
 	t := time.Now()
 	query := `UPDATE users.accounts SET online = $1 WHERE id = $2`
 	params := []interface{}{t, user.ID}
-	_, err := db.Exec(query, params...)
+	_, err := db.Exec(query, params)
 	if err != nil {
 		report.ErrorSQLServer(nil, err, query, params...)
 		return
